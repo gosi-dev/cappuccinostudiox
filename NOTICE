@@ -1,0 +1,28 @@
+Cappuccino Studiox — third-party assets notice
+==============================================
+
+This site ships the following third-party assets. Each is used under its own
+licence; the licence text is preserved in the files where the licence requires it.
+
+1. PDF.js 5.4.149 — js/vendor/pdfjs/pdf.min.mjs, js/vendor/pdfjs/pdf.worker.min.mjs
+   Copyright 2024 Mozilla Foundation.
+   Licensed under the Apache License, Version 2.0.
+   Full licence: https://www.apache.org/licenses/LICENSE-2.0
+   The @licstart/@licend block is retained at the top of pdf.min.mjs.
+   Vendored locally (instead of loading from cdnjs) so the page needs no
+   third-party script origin.
+
+2. Inter (font) — loaded from Google Fonts (fonts.googleapis.com / fonts.gstatic.com)
+   Copyright The Inter Project Authors.
+   Licensed under the SIL Open Font License, Version 1.1.
+   For self-hosting / licence copy: https://github.com/rsms/inter
+
+3. Project photography — images.unsplash.com
+   Photographs are served by Unsplash. Each image is used under the Unsplash
+   licence (https://unsplash.com/license), which permits free commercial use and
+   requires that the photographer / Unsplash not be misrepresented as endorsing
+   this site. Attribution is provided on the project pages where the photograph
+   is displayed. Confirm per-image attribution before adding new imagery.
+
+4. No analytics, tag managers, chat widgets, advertising or other third-party
+   scripts are installed. There are no iframe embeds.

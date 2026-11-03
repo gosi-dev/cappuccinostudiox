@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    <title>Cappuccino Studiox</title>
+    <link rel="stylesheet" href="kit.css">
+</head>
+<body>
+    <!-- Caret: canonical down-pointing half-square triangle (dropdown icon only) -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0" aria-hidden="true">
+        <defs>
+            <symbol id="kit-caret" viewBox="0 0 12 12">
+                <path d="M0 3h12L6 9z"/>
+            </symbol>
+        </defs>
+    </svg>
+    <!-- Top right: component dropdown (same padding as UI Kit / switch: 2rem) -->
+    <div class="kit-floating-component-dropdown">
+        <div class="kit-component-dropdown">
+            <button type="button" class="kit-component-dropdown-trigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Choose component">
+                <span class="kit-component-dropdown-label">JOIN WAITLIST</span>
+                <span class="kit-component-dropdown-arrow" aria-hidden="true"><svg class="kit-caret" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><use href="#kit-caret"/></svg></span>
+            </button>
+            <div class="kit-component-dropdown-list" role="listbox">
+                <button type="button" class="kit-component-dropdown-option" role="option" data-component="join-waitlist">Join Waitlist</button>
+            </div>
+        </div>
+    </div>
+    <!-- Bottom left: UI Kit only -->
+    <div class="kit-floating-description">
+        <h1 class="kit-page-title">UI Kit</h1>
+    </div>
+    <div class="kit-pages">
+        <div class="kit-page kit-page-preview">
+        <div class="kit-viewport-wrap kit-viewport-wrap-preview">
+            <div class="kit-viewport-label">Preview — resize or inspect at narrow width for mobile</div>
+            <div class="kit-viewport kit-viewport-preview">
+                <div class="kit-component kit-component-join-waitlist" data-component="join-waitlist">
+                <div class="kit-modal-wrap">
+                    <div class="kit-modal-label">JOIN WAITLIST</div>
+                    <div class="kit-modal-row">
+                        <input type="text" class="kit-modal-input" placeholder="FIRSTNAME LASTNAME" aria-label="Full name">
+                    </div>
+                    <div class="kit-modal-row">
+                        <input type="email" class="kit-modal-input" placeholder="emailaddress@email.com" aria-label="Email">
+                    </div>
+                    <div class="kit-modal-row kit-modal-tier-row">
+                        <div class="kit-modal-dropdown kit-modal-tier" data-name="tier">
+                            <button type="button" class="kit-modal-dropdown-trigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Choose tier">
+                                <span class="kit-modal-dropdown-label">REGULAR ACCESS</span>
+                                <span class="kit-modal-dropdown-arrow" aria-hidden="true"><svg class="kit-caret" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><use href="#kit-caret"/></svg></span>
+                            </button>
+                            <div class="kit-modal-dropdown-list" role="listbox">
+                                <button type="button" class="kit-modal-dropdown-option" role="option" data-value="regular" data-label="REGULAR ACCESS" data-price="Free">REGULAR ACCESS</button>
+                                <button type="button" class="kit-modal-dropdown-option" role="option" data-value="priority" data-label="PRIORITY ACCESS" data-price="$ 100">PRIORITY ACCESS</button>
+                            </div>
+                        </div>
+                        <div class="kit-modal-price-block" aria-live="polite">
+                            <span class="kit-modal-price-value">Free</span>
+                        </div>
+                    </div>
+                    <div class="kit-modal-row">
+                        <button type="button" class="kit-modal-submit">
+                            <span>COMPLETE</span>
+                            <span class="kit-modal-submit-icon" aria-hidden="true">
+                                <svg class="kit-caret kit-caret-right" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><use href="#kit-caret"/></svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    <script src="../js/inline/ui-kit-index-1.js"></script>
+</body>
+</html>

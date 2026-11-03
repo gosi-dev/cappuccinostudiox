@@ -1,0 +1,67 @@
+# Redirects are evaluated in file order and BEFORE netlify.toml rules, so the
+# deny rules below win over the catch-all rewrites there.
+#
+# netlify.toml publishes the repo root (publish = "."), which means server-side
+# code and local data files would otherwise be downloadable from the public site.
+# Every one of these paths returns a 404.
+
+/netlify/*                      /404.html   404
+/netlify                        /404.html   404
+/server.mjs                     /404.html   404
+/package.json                   /404.html   404
+/package-lock.json              /404.html   404
+/netlify.toml                   /404.html   404
+/.gitignore                     /404.html   404
+/.git/*                         /404.html   404
+/.netlify/*                     /404.html   404
+/.env                           /404.html   404
+/.env.*                         /404.html   404
+/_headers                      /404.html   404
+/_redirects                    /404.html   404
+/SECURITY_REPORT.md            /404.html   404
+
+# NOTICE is intentionally left public: it carries the third-party licence
+# attribution for the vendored PDF.js build.
+
+# Personal data: local JSON stores used by the dev server fallback.
+# (projects.json / site-config.json stay public — the pages fetch them as a
+# fallback when the API is unreachable.)
+/src/data/bookings.json         /404.html   404
+/src/data/waitlist.json         /404.html   404
+
+# Dev-only, archived and third-party trees.
+/node_modules/*                 /404.html   404
+/_deprecated/*                  /404.html   404
+/_archive/*                     /404.html   404
+/_asset-archive/*               /404.html   404
+/_pdf-archive/*                 /404.html   404
+/docs/*                         /404.html   404
+/scripts/*                      /404.html   404
+
+# Same deny rules under the /cappuccinostudiox mount point (the netlify.toml
+# prefix rewrite would otherwise re-expose them there).
+/cappuccinostudiox/netlify/*            /404.html   404
+/cappuccinostudiox/server.mjs           /404.html   404
+/cappuccinostudiox/package.json         /404.html   404
+/cappuccinostudiox/package-lock.json    /404.html   404
+/cappuccinostudiox/netlify.toml         /404.html   404
+/cappuccinostudiox/.gitignore           /404.html   404
+/cappuccinostudiox/.env                 /404.html   404
+/cappuccinostudiox/.env.*               /404.html   404
+/cappuccinostudiox/.netlify/*           /404.html   404
+/cappuccinostudiox/_headers             /404.html   404
+/cappuccinostudiox/_redirects           /404.html   404
+/cappuccinostudiox/src/data/bookings.json   /404.html   404
+/cappuccinostudiox/src/data/waitlist.json   /404.html   404
+/cappuccinostudiox/node_modules/*       /404.html   404
+/cappuccinostudiox/SECURITY_REPORT.md   /404.html   404
+/cappuccinostudiox/.git/*               /404.html   404
+/cappuccinostudiox/_deprecated/*        /404.html   404
+/cappuccinostudiox/_archive/*           /404.html   404
+/cappuccinostudiox/_asset-archive/*     /404.html   404
+/cappuccinostudiox/_pdf-archive/*       /404.html   404
+/cappuccinostudiox/docs/*               /404.html   404
+/cappuccinostudiox/scripts/*            /404.html   404
+
+# Admin/editor pages are intentionally reachable but never linked or indexed;
+# see the X-Robots-Tag entries in _headers. Writes require ADMIN_TOKEN.

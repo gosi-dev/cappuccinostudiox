@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/basePath-init.js"></script>
+    <script src="js/inline/project-1.js"></script>
+    <style>
+        html.story-route-check,
+        html.story-route-check body {
+            visibility: hidden;
+            background: #0b0b0b;
+        }
+    </style>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="Studioxx Logo.png" as="image">
+    <title>Cappuccino Studiox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html,
+        body,
+        * {
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            background-color: #E70017;
+        }
+
+        body {
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            font-family: 'Code Saver', sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+        }
+
+        /* Background video layer: fill viewport so cover crops only one dimension */
+        .background-videos {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            min-width: 100vw;
+            min-height: 100vh;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            filter: brightness(0.5);
+        }
+
+        .background-video.active {
+            opacity: 1;
+        }
+
+        /* Expanded media background: fill viewport, media covers (crop width or height only) */
+        .expanded-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            min-width: 100vw;
+            min-height: 100vh;
+            z-index: 2;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .expanded-background.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .expanded-background img,
+        .expanded-background video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(0.5);
+        }
+
+        /* Gallery container */
+        .gallery-container {
+            position: fixed;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .gallery-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-container {
+            height: calc(30vh + 3.75em);
+            /* caption zone (3em) + gap (0.75em) + media */
+            top: 70%;
+            /* 30% from bottom (percentages from bottom up) */
+            transform: translateY(-50%);
+        }
+
+        .gallery-track {
+            display: flex;
+            align-items: flex-end;
+            height: 100%;
+            padding: 0;
+            gap: 1ch;
+        }
+
+        .gallery-track-spacer {
+            flex-shrink: 0;
+        }
+
+        .gallery-track-spacer-start {
+            min-width: 50vw;
+        }
+
+        .gallery-track-spacer-end {
+            min-width: 50vw;
+        }
+
+        .gallery-item {
+            flex-shrink: 0;
+            position: relative;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            opacity: 1;
+            /* Width comes only from .gallery-item-media (image) so gap is always 1ch between image edges */
+        }
+
+        .gallery-item-media {
+            display: block;
+            margin-top: 3.1875em;
+            /* caption zone (3em) + gap (0.1875em), 50% of previous gap */
+        }
+
+        .gallery-item-media img,
+        .gallery-item-media video {
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item.hidden .gallery-item-media img,
+        .gallery-item.hidden .gallery-item-media video {
+            opacity: 0;
+            /* only media fades when not interacted with */
+        }
+
+        /* Preview mode: hovered non-active item's media matches caption opacity */
+        .gallery-item.hidden.gallery-item-media-reveal .gallery-item-media img,
+        .gallery-item.hidden.gallery-item-media-reveal .gallery-item-media video {
+            opacity: 0.4;
+        }
+
+        /* Caption: absolute so item width = image width only; fixed height so text aligns to bottom */
+        .gallery-caption {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 3em;
+            width: 80%;
+            display: flex;
+            align-items: flex-end;
+            margin: 0;
+            padding: 0;
+            color: #FFF212;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 12px;
+            line-height: 1.4;
+            text-transform: uppercase;
+            transition: opacity 0.3s ease;
+            opacity: 1;
+            box-sizing: border-box;
+        }
+
+        /* Whole caption (number + space + text) constrained to 100% of caption area so text wraps */
+        .gallery-caption-inner {
+            max-width: 100%;
+            display: block;
+        }
+
+        .gallery-caption-text {
+            white-space: normal;
+            word-wrap: break-word;
+            color: #FFF212;
+        }
+
+        .gallery-item.hidden .gallery-caption {
+            opacity: 1;
+            color: #ffffff;
+        }
+
+        .gallery-item.hidden .gallery-caption-text {
+            color: #ffffff;
+        }
+
+        /* Desktop hover mode (not preview): non-hovered items — media hidden, captions 0.4 */
+        .gallery-item.gallery-item-hover-hidden .gallery-item-media img,
+        .gallery-item.gallery-item-hover-hidden .gallery-item-media video {
+            opacity: 0;
+        }
+
+        .gallery-item.gallery-item-hover-hidden .gallery-caption {
+            opacity: 1;
+            color: #ffffff;
+        }
+
+        .gallery-item.gallery-item-hover-hidden .gallery-caption-text {
+            color: #ffffff;
+        }
+
+        .gallery-item-media img,
+        .gallery-item-media video {
+            height: 30vh;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .gallery-container {
+                height: calc(21vh + 3.25em);
+                top: 70%;
+                /* 30% from bottom */
+            }
+
+            .gallery-item-media {
+                margin-top: 2.6875em;
+                /* caption zone (2.5em) + gap (0.1875em), 50% of previous gap */
+            }
+
+            .gallery-caption {
+                font-size: 10px;
+                height: 2.5em;
+            }
+
+            .gallery-item-media img,
+            .gallery-item-media video {
+                height: 21vh;
+            }
+
+        }
+
+        /* Project menu (same look as kitchen / other pages) */
+        .navigation {
+            position: fixed;
+            top: 40px;
+            z-index: 200;
+        }
+
+        .menu-container {
+            position: fixed;
+            top: 40px;
+            left: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            z-index: 200;
+        }
+
+        .menu-button {
+            background-color: #FFF212;
+            border: 2px solid #FFF212;
+            color: #E70017;
+            height: 45px;
+            padding: 0 20px;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 20px;
+            font-weight: normal;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            white-space: nowrap;
+            width: calc(18ch + 100px);
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+        }
+
+        .menu-button:active {
+            background-color: #FFFFFF;
+            border-color: #FFFFFF;
+            color: #E70017;
+        }
+
+        .menu-button .dropdown-icon {
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #E70017;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-container.active .menu-button .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .menu-child-button {
+            background-color: #E70017;
+            border: 2px solid #FFF212;
+            color: #FFF212;
+            height: 45px;
+            padding: 0 20px;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 20px;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: flex-start;
+            white-space: nowrap;
+            align-self: flex-end;
+            opacity: 0;
+            text-decoration: none;
+        }
+
+        .menu-container.active .menu-child-button {
+            display: flex;
+            opacity: 1;
+        }
+
+        .menu-child-button:hover {
+            background: #FFF212;
+            color: #E70017;
+        }
+
+        .menu-child-button:active {
+            background-color: #FFFFFF;
+            border-color: #FFFFFF;
+            color: #E70017;
+        }
+
+        .logo {
+            position: fixed;
+            top: 30px;
+            right: 80px;
+            height: 83.52px;
+            width: auto;
+            z-index: 200;
+        }
+
+        @media (max-width: 768px) {
+            .menu-container {
+                top: 20px;
+                left: 30px;
+            }
+
+            .menu-button {
+                font-size: 16px;
+                height: 40px;
+            }
+
+            .menu-child-button {
+                font-size: 16px;
+                height: 40px;
+            }
+
+            .logo {
+                top: 20px;
+                right: 30px;
+                height: 72.96px;
+            }
+        }
+
+        /* Storyline: below menu button, left-aligned; fades in/out on change; hugs content */
+        .storyline-overlay {
+            position: fixed;
+            top: 127px;
+            /* menu + 30px gap */
+            left: 80px;
+            max-width: calc(48ch + 80px);
+            max-height: 70vh;
+            padding: 0;
+            background: transparent;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            z-index: 150;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: pre-wrap;
+            text-transform: uppercase;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .storyline-overlay::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+
+        .storyline-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .storyline-content {
+            display: block;
+        }
+
+        .storyline-title {
+            display: block;
+            color: #ffffff;
+        }
+
+        .storyline-body {
+            display: block;
+            color: #ffffff;
+        }
+
+        .storyline-separator {
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            color: #ffffff;
+            margin: 0.25em 0;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .storyline-overlay {
+                top: 96px;
+                left: 30px;
+                right: 30px;
+                max-width: none;
+                width: auto;
+                font-size: 12px;
+            }
+        }
+
+        /* Content view mode (click / double-tap) */
+        .content-view-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: #E70017;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .content-view-overlay.active {
+            display: flex;
+            pointer-events: auto;
+        }
+
+        .content-view-inner {
+            max-height: 75vh;
+            max-width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .content-view-inner img,
+        .content-view-inner video {
+            max-height: 75vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .content-view-actions {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .content-view-btn {
+            width: 44px;
+            height: 44px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .content-view-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        /* PDF: close button fixed top-right (Staging V6 style), outside PDF wrap */
+        .content-view-close-fixed {
+            position: fixed;
+            top: 12px;
+            right: 12px;
+            z-index: 10001;
+            font-family: 'Code Saver', monospace;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #FFF212;
+            background: #E70017;
+            padding: 6px 12px;
+            border: 2px solid #FFF212;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        .content-view-close-fixed:hover {
+            background: #FFF212;
+            color: #E70017;
+        }
+
+        /* PDF active: scroll-outer fills overlay; inner = PDF area with viewport padding (9/10 desktop, 11/12 mobile) */
+        .content-view-pdf-scroll-outer {
+            display: block;
+            flex: 1;
+            min-height: 0;
+            min-width: 0;
+        }
+
+        .content-view-overlay.content-view-pdf-active .content-view-pdf-scroll-outer {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            justify-content: center;
+            gap: 2rem;
+            padding: 5vh 5vw;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
+            .content-view-overlay.content-view-pdf-active .content-view-pdf-scroll-outer {
+                gap: 1rem;
+                padding: 8.333vh 8.333vw;
+            }
+        }
+
+        .content-view-overlay.content-view-pdf-active .content-view-inner {
+            flex: 1;
+            min-width: 0;
+            min-height: 0;
+            max-width: calc(90vw - 2rem - 12px);
+            max-height: 90vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: block;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
+            .content-view-overlay.content-view-pdf-active .content-view-inner {
+                max-width: calc(100vw - 2 * (100vw / 12) - 1rem - 9px);
+                max-height: calc(100vh - 2 * (100vh / 12));
+            }
+        }
+
+        .content-view-overlay.content-view-pdf-active .content-view-inner::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+
+        .content-view-overlay.content-view-pdf-active .content-view-pdf-wrap {
+            width: 100%;
+            min-height: min-content;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .content-view-pdf-wrap.content-view-pdf-content-hidden {
+            visibility: hidden;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .content-view-overlay.content-view-pdf-active.content-view-pdf-canvas-mode .content-view-pdf-wrap {
+            flex: none;
+        }
+
+        .content-view-overlay.content-view-pdf-active.content-view-pdf-canvas-mode .content-view-pdf-canvas-container {
+            flex: none;
+            overflow: visible;
+            padding: 0;
+            background: transparent;
+        }
+
+        .content-view-pdf-iframe {
+            flex: 1;
+            width: 100%;
+            min-height: 0;
+            border: none;
+            background: #fff;
+        }
+
+        .content-view-pdf-canvas-container {
+            flex: none;
+            overflow: visible;
+            padding: 0;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* PDF floating toolbar: bottom, centered, same on mobile and desktop; fades after 5s inactivity */
+        .content-view-pdf-toolbar {
+            position: fixed;
+            bottom: 6rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            padding: 8px 12px;
+            background: #323639;
+            color: #fff;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 12px;
+            border-radius: 4px;
+            z-index: 501;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .content-view-pdf-toolbar.content-view-pdf-toolbar-hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .content-view-pdf-toolbar {
+                bottom: 2rem;
+            }
+        }
+
+        .content-view-pdf-toolbar-btn {
+            width: 36px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+        }
+
+        .content-view-pdf-toolbar-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .content-view-pdf-toolbar-btn:active {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .content-view-pdf-toolbar-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .content-view-pdf-toolbar-sep {
+            width: 1px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 0 4px;
+        }
+
+        /* PDF loading: yellow bar centered in overlay; content hidden until load complete */
+        .content-view-pdf-loading-wrap {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 502;
+            pointer-events: none;
+        }
+
+        .content-view-pdf-loading-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .content-view-pdf-loading-text {
+            font-family: 'Code Saver', sans-serif;
+            font-size: 0.75rem;
+            color: #FFF212;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .content-view-pdf-loading-bar-outer {
+            width: 210px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .content-view-pdf-loading-bar-outer {
+                width: 180px;
+            }
+        }
+
+        .content-view-pdf-loading-bar-inner {
+            height: 100%;
+            width: 0%;
+            background: #FFF212;
+            transition: width 0.15s ease;
+        }
+
+        .content-view-pdf-page-canvas {
+            display: block;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+        }
+
+        /* PDF custom scrollbar: 1rem (mobile) / 2rem right of PDF; thumb 9px (mobile) / 12px (desktop) for PDF only */
+        .content-view-custom-scrollbar {
+            width: 6px;
+            flex-shrink: 0;
+            position: relative;
+            display: none;
+        }
+
+        .content-view-overlay.content-view-pdf-active.content-view-pdf-loaded .content-view-custom-scrollbar {
+            display: block;
+            width: 12px;
+            align-self: stretch;
+            min-height: 0;
+        }
+
+        @media (max-width: 768px) {
+            .content-view-overlay.content-view-pdf-active.content-view-pdf-loaded .content-view-custom-scrollbar {
+                width: 9px;
+            }
+        }
+
+        .content-view-scrollbar-track {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            cursor: pointer;
+            background: transparent;
+            box-sizing: border-box;
+        }
+
+        .content-view-scrollbar-track::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            transform: translateX(-50%);
+            background: #FFF212;
+        }
+
+        .content-view-overlay.content-view-pdf-active.content-view-pdf-loaded .content-view-scrollbar-track::after {
+            width: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .content-view-overlay.content-view-pdf-active.content-view-pdf-loaded .content-view-scrollbar-track::after {
+                width: 1px;
+            }
+        }
+
+        .content-view-scrollbar-thumb {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #FFF212;
+            cursor: grab;
+            pointer-events: auto;
+        }
+
+        .content-view-scrollbar-thumb:active {
+            cursor: grabbing;
+        }
+
+        .content-view-overlay.content-view-pdf-active.content-view-pdf-loaded .content-view-scrollbar-thumb {
+            width: 12px;
+            height: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .content-view-overlay.content-view-pdf-active.content-view-pdf-loaded .content-view-scrollbar-thumb {
+                width: 9px;
+                height: 9px;
+            }
+        }
+
+        /* Mobile open-media: fit width + name/storyline below */
+        .content-view-mobile-wrap {
+            width: 100%;
+            text-align: center;
+        }
+
+        .content-view-mobile-info {
+            width: calc(100% - 1rem);
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 1rem 0.5rem 2rem;
+            text-align: left;
+            color: #fff;
+        }
+
+        .content-view-mobile-name {
+            margin: 0 0 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .content-view-mobile-storyline {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .content-view-inner {
+                flex-direction: column;
+                max-height: none;
+                overflow-y: auto;
+                align-items: stretch;
+            }
+
+            .content-view-inner .content-view-mobile-wrap img,
+            .content-view-inner .content-view-mobile-wrap video {
+                max-height: 70vh;
+            }
+        }
+        /* End-of-case-study offers link (deck view) */
+        .deck-offers-link {
+            position: fixed;
+            left: 80px;
+            bottom: 26px;
+            z-index: 210;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            background: rgba(10, 10, 10, 0.62);
+            border: 1px solid rgba(255, 242, 18, 0.5);
+            color: #FFF212;
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background-color 0.18s, border-color 0.18s;
+        }
+
+        .deck-offers-link span {
+            font-weight: 600;
+        }
+
+        .deck-offers-link:hover {
+            background: #FFF212;
+            color: #E70017;
+            border-color: #FFF212;
+        }
+
+        body:has(.content-view-overlay.active) .deck-offers-link {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .deck-offers-link {
+                left: 16px;
+                bottom: 16px;
+                padding: 8px 11px;
+                font-size: 9px;
+            }
+        }
+
+
+    </style>
+</head>
+
+<body class="loading-active page-entering">
+    <style id="loading-screen-critical">
+        body.loading-active>*:not(#loadingScreenOverlay) {
+            visibility: hidden
+        }
+
+        #loadingScreenOverlay .loading-screen-wipe {
+            height: calc((100 - var(--loading-progress, 0))*1%);
+            background: #E70017;
+            transition: height .35s linear
+        }
+    </style>
+    <div id="loadingScreenOverlay" class="loading-screen-overlay"
+        style="position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;min-width:100vw;min-height:100vh;min-height:100dvh;overflow:hidden;background:#E70017;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Code Saver',sans-serif"
+        aria-live="polite" aria-label="Loading">
+        <div class="loading-screen-logo-zone">
+            <div class="loading-screen-logo-wrap" style="position:relative;width:68px;height:84px"><img src="Studioxx Logo.png"
+                    alt="Cappuccino Studio" width="68" height="84" style="display:block;width:auto;height:84px">
+                <div class="loading-screen-wipe" style="position:absolute;left:0;right:0;top:0;pointer-events:none">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navigation">
+        <a href="index.html">
+            <img src="Studioxx Logo.png" alt="Studioxx Logo" class="logo" style="position:fixed;top:30px;left:80px;height:83.52px;width:auto;z-index:200;cursor:pointer;">
+        </a>
+        <div class="menu-container" id="projectMenuContainer" style="position:fixed;top:40px;right:80px;display:flex;flex-direction:column;align-items:flex-end;gap:12px;z-index:200;">
+            <button class="menu-button" id="projectMenuButton">
+                <span id="projectMenuText">PROJECT</span>
+                <span class="dropdown-icon"></span>
+            </button>
+            <a href="index.html" class="menu-child-button">GO OUTSIDE</a>
+            <a href="kitchen.html" class="menu-child-button">KITCHEN</a>
+            <a href="offers.html" class="menu-child-button">OFFERS</a>
+            <a href="project-files.html" class="menu-child-button" id="projectMenuBack">PROJECT FILES</a>
+            <a href="booking.html" class="menu-child-button">BOOK A SESSION</a>
+        </div>
+    </div>
+    <div class="storyline-overlay" id="storylineOverlay"></div>
+
+    <a class="deck-offers-link" href="offers.html">Want something like this? <span>See offers &rarr;</span></a>
+
+    <div class="content-view-overlay" id="contentViewOverlay">
+        <div class="content-view-pdf-scroll-outer" id="contentViewPdfScrollOuter">
+            <div class="content-view-inner" id="contentViewInner"></div>
+            <div class="content-view-pdf-scrollbar content-view-custom-scrollbar" id="contentViewPdfScrollbar"
+                aria-hidden="true">
+                <div class="content-view-scrollbar-track">
+                    <div class="content-view-scrollbar-thumb"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="background-videos" id="backgroundVideos">
+        <!-- Background videos will be inserted here -->
+    </div>
+
+    <div class="expanded-background" id="expandedBackground"></div>
+
+    <div class="gallery-container" id="galleryContainer">
+        <div class="gallery-track" id="galleryTrack">
+            <!-- Gallery items will be inserted here -->
+        </div>
+    </div>
+
+    <script type="module" src="js/pages/project.js"></script>
+        <script src="js/inline/project-2.js"></script>
+    <script src="js/inline/project-3.js"></script>
+</body>
+
+</html>

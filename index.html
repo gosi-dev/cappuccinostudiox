@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/basePath-init.js"></script>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="Studioxx Logo.png" as="image">
+    <title>Cappuccino Studiox — Design studio, Lisbon / Global</title>
+    <meta name="description"
+        content="Cappuccino Studiox is a design and content studio in Lisbon. Knock, come in through the kitchen: short-form video, product stills and a 30-day posting plan for €1,000, delivered in 7 days.">
+    <meta name="theme-color" content="#0A0A0A">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Cappuccino Studiox — Design studio, Lisbon / Global">
+    <meta property="og:description"
+        content="Short-form video, product stills and a 30-day posting plan. €1,000, delivered in 7 days.">
+    <meta property="og:image" content="Scenes/Lib/Scene 1 Front Elevation.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="ui-kit/kit.css?v=420">
+    <style>
+        html,
+        body,
+        * {
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            background-color: #E70017;
+        }
+
+        body {
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .image-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .landscape-image {
+            display: block;
+            object-fit: contain;
+            width: 100vw;
+            height: 100vh;
+            object-position: center center;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .image-container {
+                overflow-x: scroll;
+                overflow-y: scroll;
+                cursor: grab;
+            }
+
+            .image-container:active {
+                cursor: grabbing;
+            }
+
+            .landscape-image {
+                width: auto;
+                height: auto;
+                object-fit: contain;
+                object-position: center center;
+            }
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            10% {
+                transform: translate(-50%, -50%) scale(1.3);
+            }
+
+            20% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            30% {
+                transform: translate(-50%, -50%) scale(1.3);
+            }
+
+            40% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        /*
+         * The probe is a zero-size anchor point, so it needs no centring transform.
+         * Keeping a transform here would also turn it into the containing block for
+         * the fixed-position popup card used on phones.
+         */
+        .hotspot {
+            position: absolute;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        .hotspot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background-color: #FFF212;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.2s;
+        }
+
+        .hotspot::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border: 1.5px solid #FFF212;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        .hotspot:nth-child(1)::after {
+            animation-delay: 0s;
+        }
+
+        .hotspot:nth-child(2)::after {
+            animation-delay: 0.4s;
+        }
+
+        .hotspot:nth-child(3)::after {
+            animation-delay: 0.8s;
+        }
+
+        .hotspot:hover::after {
+            animation: none;
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .hotspot .eye-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: auto;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .hotspot .eye-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: #FFF212;
+        }
+
+        .hotspot .project-button {
+            position: absolute;
+            top: 50%;
+            left: calc(50% + 20px);
+            transform: translateY(-50%);
+            background-color: #FFF212;
+            border: 2px solid #FFF212;
+            color: #E70017;
+            height: 45px;
+            padding: 0 20px;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 20px;
+            font-weight: normal;
+            text-transform: uppercase;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+            white-space: nowrap;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hotspot .project-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .hotspot .project-button.active {
+            opacity: 1;
+            pointer-events: auto;
+            animation: cameraFlashIn 0.2s steps(4, end) forwards;
+        }
+
+        .hotspot .project-button.active::before {
+            animation: whiteFlashIn 0.2s steps(4, end) forwards;
+        }
+
+        .hotspot .project-button:not(.active) {
+            animation: cameraFlashOut 0.2s steps(4, end) forwards;
+        }
+
+        .hotspot .project-button:not(.active)::before {
+            animation: whiteFlashOut 0.2s steps(4, end) forwards;
+        }
+
+        .hotspot .project-button.child-button {
+            background-color: #E70017;
+            border: 2px solid #FFF212;
+            color: #FFF212;
+        }
+
+        @media (hover: hover) {
+            .hotspot .project-button:hover {
+                background-color: #E70017;
+                border-color: #FFF212;
+                color: #FFF212;
+            }
+
+            .hotspot .project-button.child-button:hover {
+                background-color: #FFF212;
+                border-color: #FFF212;
+                color: #E70017;
+            }
+        }
+
+        .hotspot .project-button:active,
+        .hotspot .project-button.touch-active {
+            background-color: #FFFFFF;
+            border-color: #FFFFFF;
+            color: #E70017;
+        }
+
+        @media (max-width: 768px) {
+            .hotspot .project-button {
+                height: 32px;
+                padding: 0 12px;
+                font-size: 14px;
+            }
+
+            .hotspot .project-button.child-button {
+                background-color: #E70017;
+                border-color: #FFF212;
+                color: #FFF212;
+            }
+
+            .hotspot .project-button:active,
+            .hotspot .project-button.touch-active {
+                background-color: #E70017;
+                border-color: #FFF212;
+                color: #FFF212;
+            }
+        }
+
+        .hotspot.active .eye-icon {
+            opacity: 1;
+        }
+
+        .hotspot.active::after {
+            display: none;
+        }
+
+        @media (hover: hover) {
+            .hotspot:hover .eye-icon {
+                opacity: 1;
+            }
+
+            .hotspot:hover::before {
+                opacity: 0;
+            }
+        }
+
+        .hotspot.active::before {
+            opacity: 0;
+        }
+
+        .navigation {
+            position: fixed;
+            top: 40px;
+            z-index: 300;
+        }
+
+        .menu-container {
+            position: fixed;
+            top: 40px;
+            right: 80px;
+            left: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+            z-index: 300;
+        }
+
+        .menu-button {
+            background-color: #FFF212;
+            border: 2px solid #FFF212;
+            color: #E70017;
+            height: 45px;
+            padding: 0 20px;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 20px;
+            font-weight: normal;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            white-space: nowrap;
+            width: calc(18ch + 100px);
+            transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+        }
+
+        .menu-button:active {
+            background-color: #FFFFFF;
+            border-color: #FFFFFF;
+            color: #E70017;
+        }
+
+        .menu-button .dropdown-icon {
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #E70017;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-container.active .menu-button .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .menu-child-button {
+            background-color: #E70017;
+            border: 2px solid #FFF212;
+            color: #FFF212;
+            height: 45px;
+            padding: 0 20px;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 20px;
+            font-weight: normal;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: flex-start;
+            white-space: nowrap;
+            align-self: flex-end;
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-child-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .menu-container.active .menu-child-button {
+            display: flex;
+            animation: cameraFlashIn 0.2s steps(4, end) forwards;
+        }
+
+        .menu-container.active .menu-child-button::before {
+            animation: whiteFlashIn 0.2s steps(4, end) forwards;
+            animation-delay: var(--flash-delay, 0s);
+        }
+
+        .menu-container:not(.active) .menu-child-button {
+            animation: cameraFlashOut 0.2s steps(4, end) forwards;
+        }
+
+        .menu-container:not(.active) .menu-child-button::before {
+            animation: whiteFlashOut 0.2s steps(4, end) forwards;
+            animation-delay: var(--flash-delay, 0s);
+        }
+
+        @keyframes cameraFlashIn {
+            0% {
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            75% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes cameraFlashOut {
+            0% {
+                opacity: 1;
+            }
+
+            25% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            75% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes whiteFlashIn {
+            0% {
+                opacity: 1;
+            }
+
+            25% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            75% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes whiteFlashOut {
+            0% {
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            75% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @media (hover: hover) {
+            .menu-child-button:hover {
+                background-color: #FFF212;
+                border-color: #FFF212;
+                color: #E70017;
+            }
+        }
+
+        .menu-child-button:active,
+        .menu-child-button.touch-active {
+            background-color: #FFFFFF;
+            border-color: #FFFFFF;
+            color: #E70017;
+        }
+
+        .logo {
+            position: fixed;
+            top: 30px;
+            left: 80px;
+            height: 83.52px;
+            width: auto;
+            z-index: 300;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .navigation {
+                top: 24px;
+            }
+
+            /*
+             * Phones mirror the project-files header: logo pinned left, menu pinned
+             * right, both sized against the viewport so neither can land on top of
+             * the other when the screen narrows.
+             */
+            .menu-container {
+                top: 24px;
+                right: 30px;
+                left: auto;
+                align-items: flex-end;
+                gap: 8px;
+            }
+
+            .menu-button {
+                height: 32px;
+                padding: 0 10px;
+                gap: 10px;
+                font-size: clamp(11px, 3.4vw, 13px);
+                justify-content: space-between;
+                width: auto;
+                min-width: clamp(128px, 42vw, 170px);
+                max-width: calc(100vw - 140px);
+            }
+
+            .menu-button:active {
+                background-color: #FFFFFF;
+                border-color: #FFFFFF;
+                color: #E70017;
+            }
+
+            .menu-child-button {
+                height: 32px;
+                padding: 0 12px;
+                font-size: clamp(11px, 3.4vw, 13px);
+            }
+
+            .menu-child-button:active,
+            .menu-child-button.touch-active {
+                background-color: #E70017;
+                border-color: #FFF212;
+                color: #FFF212;
+            }
+
+            .logo {
+                top: 24px;
+                left: 30px;
+                right: auto;
+                height: clamp(44px, 15vw, 58px);
+            }
+
+            /*
+             * Probe labels become a card pinned under the header on phones. Anchored
+             * to the viewport rather than the probe so the copy can never run past
+             * the edge of a narrow screen.
+             */
+            .hotspot .dialogue-box {
+                position: fixed;
+                top: 92px;
+                left: 16px;
+                right: 16px;
+                width: auto;
+                gap: 8px;
+                z-index: 320;
+            }
+
+            .hotspot .dialogue-box .subtitle-box {
+                width: 100%;
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            .hotspot .dialogue-box .project-button {
+                height: 36px;
+                padding: 0 14px;
+                font-size: 13px;
+            }
+        }
+
+        .dialogue-box {
+            position: absolute;
+            top: -10px;
+            left: calc(50% + 20px);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 10;
+        }
+
+        .dialogue-box.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .subtitle-box {
+            background-color: #FFF212;
+            border: 2px solid #FFF212;
+            color: #E70017;
+            padding: 10px 20px;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 20px;
+            font-weight: normal;
+            text-transform: uppercase;
+            line-height: normal;
+            box-sizing: border-box;
+            white-space: normal;
+            word-wrap: break-word;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subtitle-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .dialogue-box.active .subtitle-box {
+            animation: cameraFlashIn 0.2s steps(4, end) forwards;
+            animation-delay: 0s;
+        }
+
+        .dialogue-box.active .subtitle-box::before {
+            animation: whiteFlashIn 0.2s steps(4, end) forwards;
+            animation-delay: 0s;
+        }
+
+        .dialogue-box.active .project-button {
+            animation: cameraFlashIn 0.2s steps(4, end) forwards;
+            animation-delay: 0.1s;
+        }
+
+        .dialogue-box.active .project-button::before {
+            animation: whiteFlashIn 0.2s steps(4, end) forwards;
+            animation-delay: 0.1s;
+        }
+
+        .dialogue-box:not(.active) .subtitle-box {
+            animation: cameraFlashOut 0.2s steps(4, end) forwards;
+            animation-delay: 0.1s;
+        }
+
+        .dialogue-box:not(.active) .subtitle-box::before {
+            animation: whiteFlashOut 0.2s steps(4, end) forwards;
+            animation-delay: 0.1s;
+        }
+
+        .dialogue-box:not(.active) .project-button {
+            animation: cameraFlashOut 0.2s steps(4, end) forwards;
+            animation-delay: 0s;
+        }
+
+        .dialogue-box:not(.active) .project-button::before {
+            animation: whiteFlashOut 0.2s steps(4, end) forwards;
+            animation-delay: 0s;
+        }
+
+        .dialogue-box .project-button {
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+            align-self: flex-start;
+            pointer-events: auto;
+            opacity: 1;
+            overflow: hidden;
+        }
+
+        .dialogue-box .project-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF;
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .subtitle-box {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+        }
+
+        .text-carousel {
+            position: fixed;
+            top: 75%;
+            left: 0;
+            width: 100vw;
+            height: 12.5vh;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 200;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .carousel-track {
+            display: inline-flex;
+            white-space: nowrap;
+            align-items: center;
+            animation: scrollCarousel 50s linear infinite;
+        }
+
+        .carousel-item {
+            display: inline-block;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 24px;
+            color: #FFF212;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .carousel-separator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #FFF212;
+            margin: 0 20px;
+            flex-shrink: 0;
+        }
+
+        @keyframes scrollCarousel {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .carousel-item {
+                font-size: 16px;
+            }
+        }
+
+        /* Modal overlay: background image + red 90% layer, modal centered */
+        .site-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        body.site-modal-open .site-overlay {
+            display: flex;
+        }
+
+        body.site-modal-open .navigation,
+        body.site-modal-open .image-container {
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .site-overlay-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url("Scenes/Lib/Scene 1 Front Elevation.png");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .site-overlay-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #E70017;
+            opacity: 0.9;
+        }
+
+        .site-overlay-center {
+            position: relative;
+            z-index: 1;
+            min-width: 320px;
+            max-width: 100%;
+        }
+
+        @media (max-width: 360px) {
+            .site-overlay-center {
+                min-width: 0;
+                width: 100%;
+            }
+        }
+
+        .site-modal {
+            display: none;
+        }
+
+        body.site-modal-open .site-modal.active {
+            display: block;
+        }
+
+        /* Must match ui-kit/kit.css .kit-modal-wrap so site and kit are identical */
+        .site-overlay .site-modal .kit-modal-wrap {
+            max-width: 320px;
+        }
+
+        .site-modal .booking-message,
+        .site-modal .waitlist-message {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            min-height: 1.2em;
+        }
+
+        .site-modal .booking-message,
+        .site-modal .booking-message.error,
+        .site-modal .waitlist-message,
+        .site-modal .waitlist-message.error {
+            color: #FFF212;
+        }
+
+        .site-modal .booking-message.success,
+        .site-modal .waitlist-message.success {
+            color: #FFF212;
+        }
+
+        .booking-success-card {
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 2px solid #FFF212;
+            color: #FFF212;
+            font-size: 0.8rem;
+        }
+
+        .booking-success-card .booking-success-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .booking-success-card .booking-success-details {
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .booking-success-card .booking-success-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .booking-success-card a,
+        .booking-success-card .booking-success-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #FFF212;
+            color: #E70017;
+            border: 2px solid #FFF212;
+            text-align: center;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        .booking-success-card a:hover,
+        .booking-success-card .booking-success-btn:hover {
+            background: #E70017;
+            color: #FFF212;
+            border-color: #FFF212;
+        }
+
+        .booking-success-card a:active,
+        .booking-success-card .booking-success-btn:active {
+            background: #FFFFFF;
+            color: #E70017;
+            border-color: #FFFFFF;
+        }
+
+        .site-modal .kit-modal-wrap.booking-done .kit-modal-label,
+        .site-modal .kit-modal-wrap.booking-done .kit-modal-row {
+            display: none !important;
+        }
+
+        .site-modal .kit-modal-wrap.booking-done .booking-message {
+            margin-top: 0;
+        }
+
+        .kit-modal-option-disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .waitlist-success-card {
+            display: none;
+            margin-top: 0;
+            padding: 1rem;
+            border: 2px solid #FFF212;
+            color: #FFF212;
+            font-size: 0.8rem;
+        }
+
+        .waitlist-success-card .waitlist-success-details {
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .waitlist-success-card .waitlist-success-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .waitlist-success-card .waitlist-success-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #FFF212;
+            color: #E70017;
+            border: 2px solid #FFF212;
+            text-align: center;
+            font-family: inherit;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        .waitlist-success-card .waitlist-success-btn:hover {
+            background: #E70017;
+            color: #FFF212;
+            border-color: #FFF212;
+        }
+
+        .waitlist-success-card .waitlist-success-btn:active {
+            background: #FFFFFF;
+            color: #E70017;
+            border-color: #FFFFFF;
+        }
+
+        .site-modal .kit-modal-wrap.waitlist-done .kit-modal-label,
+        .site-modal .kit-modal-wrap.waitlist-done .kit-modal-row,
+        .site-modal .kit-modal-wrap.waitlist-done .waitlist-message {
+            display: none !important;
+        }
+
+        .site-modal .kit-modal-wrap.waitlist-done .waitlist-success-card {
+            display: block !important;
+        }
+    </style>
+</head>
+
+<body class="loading-active page-entering">
+    <style id="loading-screen-critical">
+        body.loading-active>*:not(#loadingScreenOverlay):not(.text-carousel) {
+            visibility: hidden
+        }
+
+        body.loading-active .text-carousel {
+            z-index: 100000
+        }
+
+        #loadingScreenOverlay .loading-screen-wipe {
+            height: calc((100 - var(--loading-progress, 0))*1%);
+            background: #E70017;
+            transition: height .35s linear
+        }
+    </style>
+    <div id="loadingScreenOverlay" class="loading-screen-overlay"
+        style="position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;min-width:100vw;min-height:100vh;min-height:100dvh;overflow:hidden;background:#E70017;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Code Saver',sans-serif"
+        aria-live="polite" aria-label="Loading">
+        <div class="loading-screen-logo-zone">
+            <div class="loading-screen-logo-wrap" style="position:relative;width:68px;height:84px"><img src="Studioxx Logo.png"
+                    alt="Cappuccino Studio" width="68" height="84" style="display:block;width:auto;height:84px">
+                <div class="loading-screen-wipe" style="position:absolute;left:0;right:0;top:0;pointer-events:none">
+                </div>
+            </div>
+        </div>
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0" aria-hidden="true">
+        <defs>
+            <symbol id="kit-caret" viewBox="0 0 12 12">
+                <path d="M0 3h12L6 9z" />
+            </symbol>
+        </defs>
+    </svg>
+    <div class="navigation">
+        <a href="index.html" id="logoLink">
+            <img src="Studioxx Logo.png" alt="Studioxx Logo" class="logo">
+        </a>
+        <div class="menu-container" id="menuContainer">
+            <button class="menu-button" id="menuButton">
+                <span id="menuText">OUTSIDE</span>
+                <span class="dropdown-icon"></span>
+            </button>
+            <button class="menu-child-button" data-page="index.html">GO OUTSIDE</button>
+            <button class="menu-child-button" data-page="kitchen.html">KITCHEN</button>
+            <button class="menu-child-button" data-page="offers.html">OFFERS</button>
+            <button class="menu-child-button" data-page="project-files.html">PROJECT FILES</button>
+            <button class="menu-child-button" data-page="booking.html">BOOK A SESSION</button>
+        </div>
+    </div>
+    <div class="image-container" id="imageContainer">
+        <img src="Scenes/Lib/Scene 1 Front Elevation.png" alt="Front Elevation" class="landscape-image"
+            id="landscapeImage">
+
+        <!-- 
+        MARKER POSITIONING METHODS:
+        
+        Method 1: Pixel coordinates (recommended for diagram-based positioning)
+        Use data-x and data-y with pixel values from a diagram image the same size as the source image
+        Example: <div class="hotspot" data-x="1200" data-y="800">
+        
+        Method 2: Percentage coordinates (for grid-based positioning)
+        Use data-top and data-left with percentage values (0-100)
+        Example: <div class="hotspot" data-top="20.83" data-left="44.44">
+        -->
+        <!-- Kitchen marker - Coordinates: x=913, y=389 (base image: 1986 Ã— 1117 px) -->
+        <div class="hotspot" data-hotspot="1" data-x="913" data-y="389">
+            <span class="eye-icon">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+                </svg>
+            </span>
+            <div class="dialogue-box" id="dialogueBox1">
+                <div class="subtitle-box">Hey! Welcome to Cappuccino Studiox! Please come in through the
+                    kitchen, we have a shoot going on in the front.</div>
+                <button class="project-button child-button" data-id="1" data-page="kitchen.html">KITCHEN</button>
+            </div>
+        </div>
+        <div class="text-carousel">
+            <div class="carousel-track" id="carouselTrack"></div>
+        </div>
+    </div>
+
+    <div id="siteOverlay" class="site-overlay" role="dialog" aria-modal="true" aria-label="Modal">
+        <div class="site-overlay-bg" id="siteOverlayBg"></div>
+        <div class="site-overlay-center">
+            <div id="modalBookSession" class="site-modal" data-modal="book-session">
+                <div class="kit-modal-wrap" data-modal-prefix="booking">
+                    <div class="kit-modal-label">BOOK A SESSION</div>
+                    <div class="kit-modal-row">
+                        <input type="text" id="bookingName" class="kit-modal-input" placeholder="FIRSTNAME LASTNAME"
+                            aria-label="Full name" autocomplete="name">
+                    </div>
+                    <div class="kit-modal-row">
+                        <input type="email" id="bookingEmail" class="kit-modal-input"
+                            placeholder="emailaddress@email.com" aria-label="Email" autocomplete="email">
+                    </div>
+                    <div class="kit-modal-row">
+                        <div class="kit-modal-dropdown kit-modal-select" data-name="service">
+                            <button type="button" class="kit-modal-dropdown-trigger" aria-expanded="false"
+                                aria-haspopup="listbox" aria-label="Choose a service">
+                                <span class="kit-modal-dropdown-label">CHOOSE A SERVICE</span>
+                                <span class="kit-modal-dropdown-arrow" aria-hidden="true"><svg class="kit-caret"
+                                        viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#kit-caret" />
+                                    </svg></span>
+                            </button>
+                            <div class="kit-modal-dropdown-list-outer">
+                                <div class="kit-modal-dropdown-list" role="listbox">
+                                    <button type="button" class="kit-modal-dropdown-option" role="option"
+                                        data-value="immersive-experiences" data-label="IMMERSIVE EXPERIENCES">IMMERSIVE
+                                        EXPERIENCES</button>
+                                    <button type="button" class="kit-modal-dropdown-option" role="option"
+                                        data-value="brand-strategy" data-label="BRAND STRATEGY">BRAND STRATEGY</button>
+                                    <button type="button" class="kit-modal-dropdown-option" role="option"
+                                        data-value="product-development" data-label="PRODUCT DEVELOPMENT">PRODUCT
+                                        DEVELOPMENT</button>
+                                    <button type="button" class="kit-modal-dropdown-option" role="option"
+                                        data-value="set-design" data-label="SET DESIGN">SET DESIGN</button>
+                                    <button type="button" class="kit-modal-dropdown-option" role="option"
+                                        data-value="video-production" data-label="VIDEO PRODUCTION">VIDEO
+                                        PRODUCTION</button>
+                                    <button type="button" class="kit-modal-dropdown-option" role="option"
+                                        data-value="animation-production" data-label="ANIMATION PRODUCTION">ANIMATION
+                                        PRODUCTION</button>
+                                    <button type="button" class="kit-modal-dropdown-option" role="option"
+                                        data-value="music-release-content-dev"
+                                        data-label="MUSIC RELEASE CONTENT DEV">MUSIC RELEASE CONTENT DEV</button>
+                                    <button type="button" class="kit-modal-dropdown-option" role="option"
+                                        data-value="music-production" data-label="MUSIC PRODUCTION">MUSIC
+                                        PRODUCTION</button>
+                                    <button type="button" class="kit-modal-dropdown-option" role="option"
+                                        data-value="sound-design-and-production"
+                                        data-label="SOUND DESIGN AND PRODUCTION">SOUND DESIGN AND PRODUCTION</button>
+                                    <button type="button" class="kit-modal-dropdown-option" role="option"
+                                        data-value="content-design-and-dev" data-label="CONTENT DESIGN AND DEV">CONTENT
+                                        DESIGN AND DEV</button>
+                                    <button type="button" class="kit-modal-dropdown-option" role="option"
+                                        data-value="web-development" data-label="WEB DEVELOPMENT">WEB
+                                        DEVELOPMENT</button>
+                                    <button type="button" class="kit-modal-dropdown-option" role="option"
+                                        data-value="real-estate-management" data-label="REAL ESTATE MANAGEMENT">REAL
+                                        ESTATE MANAGEMENT</button>
+                                    <button type="button" class="kit-modal-dropdown-option" role="option"
+                                        data-value="marketing-consult" data-label="MARKETING CONSULT">MARKETING
+                                        CONSULT</button>
+                                    <button type="button" class="kit-modal-dropdown-option" role="option"
+                                        data-value="creative-direction" data-label="CREATIVE DIRECTION">CREATIVE
+                                        DIRECTION</button>
+                                </div>
+                                <div class="kit-modal-custom-scrollbar" aria-hidden="true">
+                                    <div class="kit-modal-scrollbar-track">
+                                        <div class="kit-modal-scrollbar-thumb"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kit-modal-row kit-modal-timeslot">
+                        <div class="kit-modal-dropdown kit-modal-date" data-name="date">
+                            <button type="button" class="kit-modal-dropdown-trigger" aria-expanded="false"
+                                aria-haspopup="listbox" aria-label="Date">
+                                <span class="kit-modal-dropdown-label"></span>
+                                <span class="kit-modal-dropdown-arrow" aria-hidden="true"><svg class="kit-caret"
+                                        viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#kit-caret" />
+                                    </svg></span>
+                            </button>
+                            <div class="kit-modal-dropdown-list-outer">
+                                <div class="kit-modal-dropdown-list" role="listbox">
+                                    <button type="button" class="kit-modal-dropdown-option" role="option" data-value=""
+                                        data-label="Loading…">Loading…</button>
+                                </div>
+                                <div class="kit-modal-custom-scrollbar" aria-hidden="true">
+                                    <div class="kit-modal-scrollbar-track">
+                                        <div class="kit-modal-scrollbar-thumb"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kit-modal-dropdown kit-modal-time" data-name="time">
+                            <button type="button" class="kit-modal-dropdown-trigger" aria-expanded="false"
+                                aria-haspopup="listbox" aria-label="Time">
+                                <span class="kit-modal-dropdown-label">11:00</span>
+                                <span class="kit-modal-dropdown-arrow" aria-hidden="true"><svg class="kit-caret"
+                                        viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#kit-caret" />
+                                    </svg></span>
+                            </button>
+                            <div class="kit-modal-dropdown-list" role="listbox">
+                                <button type="button" class="kit-modal-dropdown-option" role="option" data-value="11:00"
+                                    data-label="11:00">11:00</button>
+                                <button type="button" class="kit-modal-dropdown-option" role="option" data-value="15:00"
+                                    data-label="15:00">15:00</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kit-modal-row">
+                        <input type="hidden" id="bookingService" value="">
+                        <input type="hidden" id="bookingDate" value="">
+                        <input type="hidden" id="bookingTime" value="11:00">
+                        <button type="button" id="bookingSubmit" class="kit-modal-submit">
+                            <span>COMPLETE</span>
+                            <span class="kit-modal-submit-icon" aria-hidden="true"><svg
+                                    class="kit-caret kit-caret-right" viewBox="0 0 12 12"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#kit-caret" />
+                                </svg></span>
+                        </button>
+                    </div>
+                    <div id="bookingMessage" class="booking-message"></div>
+                    <p hidden><label>Don't fill this out: <input type="text" id="bookingBotField" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+                    <p class="booking-privacy-note" style="margin:12px 0 0;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;opacity:0.55;">We use your details only to reply to your enquiry. Email <a href="mailto:hello@cappuccinostudiox.com" style="color:inherit;">hello@cappuccinostudiox.com</a> to request deletion.</p>
+                </div>
+            </div>
+            <div id="modalWaitlist" class="site-modal" data-modal="waitlist">
+                <div class="kit-modal-wrap" data-modal-prefix="waitlist">
+                    <div class="kit-modal-label">JOIN WAITLIST</div>
+                    <div class="kit-modal-row">
+                        <input type="text" id="waitlistName" class="kit-modal-input" placeholder="FIRSTNAME LASTNAME"
+                            aria-label="Full name" autocomplete="name">
+                    </div>
+                    <div class="kit-modal-row">
+                        <input type="email" id="waitlistEmail" class="kit-modal-input"
+                            placeholder="emailaddress@email.com" aria-label="Email" autocomplete="email">
+                    </div>
+                    <div class="kit-modal-row kit-modal-tier-row">
+                        <div class="kit-modal-dropdown kit-modal-tier" data-name="tier">
+                            <button type="button" class="kit-modal-dropdown-trigger" aria-expanded="false"
+                                aria-haspopup="listbox" aria-label="Choose tier">
+                                <span class="kit-modal-dropdown-label">REGULAR ACCESS</span>
+                                <span class="kit-modal-dropdown-arrow" aria-hidden="true"><svg class="kit-caret"
+                                        viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                                        <use href="#kit-caret" />
+                                    </svg></span>
+                            </button>
+                            <div class="kit-modal-dropdown-list" role="listbox">
+                                <button type="button" class="kit-modal-dropdown-option" role="option"
+                                    data-value="regular" data-label="REGULAR ACCESS" data-price="Free">REGULAR
+                                    ACCESS</button>
+                                <button type="button" class="kit-modal-dropdown-option kit-modal-option-disabled"
+                                    role="option" data-value="priority" data-label="PRIORITY ACCESS (COMING SOON)"
+                                    data-price="$ 100" data-disabled="true">PRIORITY ACCESS (COMING SOON)</button>
+                            </div>
+                        </div>
+                        <div class="kit-modal-price-block" aria-live="polite">
+                            <span class="kit-modal-price-value">Free</span>
+                        </div>
+                    </div>
+                    <div class="kit-modal-row">
+                        <input type="hidden" id="waitlistTier" value="regular">
+                        <button type="button" id="waitlistSubmit" class="kit-modal-submit">
+                            <span>COMPLETE</span>
+                            <span class="kit-modal-submit-icon" aria-hidden="true"><svg
+                                    class="kit-caret kit-caret-right" viewBox="0 0 12 12"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <use href="#kit-caret" />
+                                </svg></span>
+                        </button>
+                    </div>
+                    <div id="waitlistMessage" class="waitlist-message"></div>
+                    <p hidden><label>Don't fill this out: <input type="text" id="waitlistBotField" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+                    <p class="booking-privacy-note" style="margin:12px 0 0;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;opacity:0.55;">We use your details only to reply about your waitlist place. Email <a href="mailto:hello@cappuccinostudiox.com" style="color:inherit;">hello@cappuccinostudiox.com</a> to request deletion.</p>
+
+                    <div id="waitlistSuccessCard" class="waitlist-success-card" style="display: none;">
+                        <div class="waitlist-success-details">You have been added to the waitlist, you will be notified
+                            when the Enter the Jungle pieces are live.</div>
+                        <div class="waitlist-success-actions">
+                            <button type="button" class="waitlist-success-btn"
+                                id="waitlistContinueBtn">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Populate date rollup immediately so it is never empty (no dependency on API or site-modals.js) -->
+    <script src="js/inline/index-1.js"></script>
+    <script type="module" src="js/site-modals.js"></script>
+    <script type="module" src="js/pages/index.js"></script>
+    <script src="js/inline/index-2.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+# Security headers for the static site (Netlify reads this from the publish root).
+#
+# CSP notes:
+#  - script-src is 'self' only: every inline <script> was extracted to js/inline/*.js
+#    and all inline on* handlers were replaced with addEventListener.
+#  - style-src still needs 'unsafe-inline' because the pages carry inline <style>
+#    blocks and style="" attributes and there is no build step to hash or extract
+#    them. Residual risk, documented in SECURITY_REPORT.md.
+#  - fonts.googleapis.com is allowlisted for the @import in the site CSS;
+#    fonts.gstatic.com serves the font files.
+#  - frame-src is 'self' blob: because the project viewer renders PDFs in a
+#    same-origin iframe (and PDF.js may hand back a blob URL). Setting it to
+#    'none' would silently break PDF viewing.
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data: https:; media-src 'self' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; script-src 'self'; worker-src 'self' blob:; connect-src 'self'; frame-src 'self' blob:; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests
+
+# Admin surfaces: never cached, never indexed.
+/admin.html
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow
+
+/project-edit.html
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow
+
+/content-management.html
+  Cache-Control: no-store
+  X-Robots-Tag: noindex, nofollow
+
+/ui-kit/*
+  X-Robots-Tag: noindex, nofollow
+
+# API responses are JSON only.
+/api/*
+  X-Content-Type-Options: nosniff
+  Cache-Control: no-store
+
+/cappuccinostudiox/api/*
+  X-Content-Type-Options: nosniff
+  Cache-Control: no-store

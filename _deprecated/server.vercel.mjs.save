@@ -1,0 +1,110 @@
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import fs from 'fs';
+
+dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use(express.static(__dirname));
+
+// Helper to convert Vercel function to Express handler
+function createHandler(vercelFunction) {
+  return async (req, res) => {
+    try {
+      // Create a Vercel-compatible request object
+      const vercelReq = {
+        ...req,
+        headers: req.headers,
+        method: req.method,
+        url: req.url,
+        json: () => Promise.resolve(req.body)
+      };
+
+      // Call the appropriate method based on HTTP verb
+      let response;
+      if (req.method === 'GET' && vercelFunction.GET) {
+        response = await vercelFunction.GET(vercelReq);
+      } else if (req.method === 'POST' && vercelFunction.POST) {
+        response = await vercelFunction.POST(vercelReq);
+      } else if (req.method === 'PUT' && vercelFunction.PUT) {
+        response = await vercelFunction.PUT(vercelReq);
+      } else if (req.method === 'DELETE' && vercelFunction.DELETE) {
+        response = await vercelFunction.DELETE(vercelReq);
+      } else {
+        return res.status(405).json({ error: 'Method not allowed' });
+      }
+
+      // Convert Vercel response to Express response
+      if (response) {
+        const data = await response.json();
+        res.status(response.status || 200).json(data);
+      }
+    } catch (error) {
+      console.error('Handler error:', error);
+      res.status(500).json({ error: error.message });
+    }
+  };
+}
+
+// Load all API routes dynamically
+async function loadRoutes() {
+  const apiDir = path.join(__dirname, 'api');
+  const files = fs.readdirSync(apiDir);
+
+  for (const file of files) {
+    if (file.endsWith('.js')) {
+      try {
+        const routePath = '/api/' + file.replace('.js', '');
+        const modulePath = path.join(apiDir, file);
+        const module = await import(`file://${modulePath}`);
+        
+        // Create Express handlers for each HTTP method
+        app.get(routePath, createHandler(module));
+        app.post(routePath, createHandler(module));
+        app.put(routePath, createHandler(module));
+        app.delete(routePath, createHandler(module));
+        
+        console.log(`✅ Loaded API route: ${routePath}`);
+      } catch (err) {
+        console.log(`❌ Failed to load ${file}:`, err.message);
+      }
+    }
+  }
+}
+
+// Start server
+await loadRoutes();
+
+// Handle all other routes - serve static files
+// Use `app.use` with a function for better wildcard handling
+app.use((req, res, next) => {
+  // Construct the potential file path from the request URL
+  const filePath = path.join(__dirname, req.path);
+
+  // Check if the file exists and is actually a file (not a directory)
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+    // If it's a file, send it
+    return res.sendFile(filePath);
+  }
+
+  // If it's not a file, we can let other middleware handle it, or send a 404.
+  // For Single Page Applications (SPA), you might want to serve index.html here.
+  // Let's first try sending a 404 for clarity.
+  res.status(404).send('Not Found');
+});
+
+app.listen(PORT, () => {
+  console.log(`\n🚀 Server running at http://localhost:${PORT}`);
+  console.log(`📁 Serving static files from: ${__dirname}`);
+});

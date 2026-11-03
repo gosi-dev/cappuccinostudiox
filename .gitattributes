@@ -1,0 +1,17 @@
+# Site media is committed (see .gitignore). Mark it binary so git never tries to
+# text-diff, merge or line-ending-normalise it — that would corrupt video/PDF.
+*.mp4   binary
+*.webm  binary
+*.mov   binary
+*.pdf   binary
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
+*.gif   binary
+*.webp  binary
+*.avif  binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.zip   binary

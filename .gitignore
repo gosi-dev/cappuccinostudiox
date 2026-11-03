@@ -1,0 +1,35 @@
+.vercel
+.netlify
+
+# ── Secrets: never commit ──────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+config/secrets.*
+secrets.json
+
+# ── Local machine noise ───────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.log
+
+# ── Dependencies (rebuilt from package-lock.json) ─────────────────────────────
+node_modules/
+
+# ── Site media (522 MB of videos, PDFs and stills) — TRACKED on purpose ───────
+# public/assets/ is committed: the media IS the portfolio, the repo is private,
+# and every host receives this exact folder. Cost accepted knowingly — a clone
+# is ~530 MB and git cannot diff binaries (.gitattributes marks them binary).
+# If that becomes a problem, migrate to Git LFS or an object bucket; note that
+# Netlify and Cloudflare Pages do not fetch LFS, so the deploy folder must stay
+# complete either way.
+
+# ── Runtime data written by the app — never commit customer submissions ───────
+# Both files are recreated on demand (readBookings/readWaitlist fall back to []).
+# Production stores this in Netlify Blobs, not on disk.
+src/data/bookings.json
+src/data/waitlist.json

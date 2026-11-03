@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/basePath-init.js"></script>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>Contact — Cappuccino Studiox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="ui-kit/kit.css?v=420">
+    <script src="js/site-nav.js" defer></script>
+    <style>
+        html, body, * { font-family: 'Inter', sans-serif !important; }
+        body {
+            min-height: 100vh;
+            background-color: #0a0a0a;
+            color: #FFF212;
+            font-family: 'Code Saver', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 96px 2rem 2rem;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .booking-page-wrap {
+            width: 100%;
+            max-width: 420px;
+        }
+        /*
+         * Mirrors the offers header: same monospace links, sizes, spacing and
+         * active treatment, so the two reference pages read as one site.
+         */
+        @font-face {
+            font-family: 'Code Saver';
+            src: url('Fonts/CodeSaver-Regular.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        .booking-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 60;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px clamp(16px, 5vw, 72px);
+            background: rgba(10, 10, 10, 0.94);
+            border-bottom: 1px solid rgba(255, 242, 18, 0.18);
+        }
+        .booking-brand {
+            flex: 0 0 auto;
+            display: block;
+        }
+        .booking-brand img {
+            display: block;
+            width: auto;
+            height: clamp(24px, 6vw, 34px);
+        }
+        .booking-nav {
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 2.4vw, 34px);
+            flex: 0 1 auto;
+            min-width: 0;
+            overflow-x: auto;
+            overscroll-behavior-x: contain;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            padding: 2px 0 3px;
+        }
+        .booking-nav::-webkit-scrollbar {
+            display: none;
+        }
+        .booking-nav a {
+            flex: 0 0 auto;
+            font-family: 'Code Saver', 'SFMono-Regular', Consolas, monospace !important;
+            font-size: clamp(9px, 2.6vw, 11px);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            white-space: nowrap;
+            color: #F3F0E7;
+            padding-bottom: 3px;
+            border-bottom: 1px solid transparent;
+            transition: color 0.16s, border-color 0.16s;
+        }
+        .booking-nav a:hover,
+        .booking-nav a[aria-current='page'] {
+            color: #FFF212;
+            border-color: #FFF212;
+        }
+        .booking-message {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            min-height: 1.2em;
+        }
+        .booking-message,
+        .booking-message.error,
+        .booking-message.success { color: #FFF212; }
+        .booking-success-card {
+            margin-top: 1rem;
+            padding: 1rem;
+            border: 2px solid #FFF212;
+            color: #FFF212;
+            font-size: 0.8rem;
+        }
+        .booking-success-card .booking-success-title { font-weight: bold; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .booking-success-card .booking-success-details { margin-bottom: 1rem; line-height: 1.4; }
+        .booking-success-card .booking-success-actions { display: flex; flex-direction: column; gap: 0.5rem; }
+        .booking-success-card a,
+        .booking-success-card .booking-success-btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #FFF212;
+            color: #E70017;
+            border: 2px solid #FFF212;
+            text-align: center;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+        .booking-success-card a:hover,
+        .booking-success-card .booking-success-btn:hover { background: #E70017; color: #FFF212; border-color: #FFF212; }
+        .booking-success-card a:active,
+        .booking-success-card .booking-success-btn:active { background: #FFFFFF; color: #E70017; border-color: #FFFFFF; }
+        .kit-modal-wrap.booking-done .kit-modal-label,
+        .kit-modal-wrap.booking-done .kit-modal-row { display: none !important; }
+        .kit-modal-wrap.booking-done .booking-message { margin-top: 0; }
+
+        .kit-modal-option-disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="page-entering">
+    <header class="booking-header">
+        <a class="booking-brand" href="index.html" aria-label="Cappuccino Studiox home">
+            <img src="Studioxx Logo.png" alt="Cappuccino Studiox" width="68" height="84">
+        </a>
+        <nav class="booking-nav" aria-label="Main">
+            <a href="index.html">Outside</a>
+            <a href="kitchen.html">Kitchen</a>
+            <a href="offers.html">Offers</a>
+            <a href="project-files.html">Project files</a>
+            <a href="booking.html" aria-current="page">Book a session</a>
+        </nav>
+    </header>
+    <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0" aria-hidden="true">
+        <defs>
+            <symbol id="kit-caret" viewBox="0 0 12 12">
+                <path d="M0 3h12L6 9z"/>
+            </symbol>
+        </defs>
+    </svg>
+    <div class="booking-page-wrap">
+        <div class="kit-modal-wrap">
+            <div class="kit-modal-label">BOOK A SESSION</div>
+            <div class="kit-modal-row">
+                <input type="text" id="bookingName" class="kit-modal-input" placeholder="FIRSTNAME LASTNAME" aria-label="Full name" autocomplete="name">
+            </div>
+            <div class="kit-modal-row">
+                <input type="email" id="bookingEmail" class="kit-modal-input" placeholder="emailaddress@email.com" aria-label="Email" autocomplete="email">
+            </div>
+            <div class="kit-modal-row">
+                <div class="kit-modal-dropdown kit-modal-select" data-name="service">
+                    <button type="button" class="kit-modal-dropdown-trigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Choose a service">
+                        <span class="kit-modal-dropdown-label">CHOOSE A SERVICE</span>
+                        <span class="kit-modal-dropdown-arrow" aria-hidden="true"><svg class="kit-caret" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><use href="#kit-caret"/></svg></span>
+                    </button>
+                    <div class="kit-modal-dropdown-list-outer">
+                        <div class="kit-modal-dropdown-list" role="listbox">
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="creative-strategist" data-label="CREATIVE STRATEGIST — €2,500 / MONTH">CREATIVE STRATEGIST — €2,500 / MONTH</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="content-engine" data-label="CONTENT ENGINE — €1,000 / 7 DAYS">CONTENT ENGINE — €1,000 / 7 DAYS</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="edit-sprint" data-label="EDIT SPRINT — €500 / 3 DAYS">EDIT SPRINT — €500 / 3 DAYS</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="immersive-experiences" data-label="IMMERSIVE EXPERIENCES">IMMERSIVE EXPERIENCES</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="brand-strategy" data-label="BRAND STRATEGY">BRAND STRATEGY</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="product-development" data-label="PRODUCT DEVELOPMENT">PRODUCT DEVELOPMENT</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="set-design" data-label="SET DESIGN">SET DESIGN</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="video-production" data-label="VIDEO PRODUCTION">VIDEO PRODUCTION</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="animation-production" data-label="ANIMATION PRODUCTION">ANIMATION PRODUCTION</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="music-release-content-dev" data-label="MUSIC RELEASE CONTENT DEV">MUSIC RELEASE CONTENT DEV</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="music-production" data-label="MUSIC PRODUCTION">MUSIC PRODUCTION</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="sound-design-and-production" data-label="SOUND DESIGN AND PRODUCTION">SOUND DESIGN AND PRODUCTION</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="content-design-and-dev" data-label="CONTENT DESIGN AND DEV">CONTENT DESIGN AND DEV</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="web-development" data-label="WEB DEVELOPMENT">WEB DEVELOPMENT</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="real-estate-management" data-label="REAL ESTATE MANAGEMENT">REAL ESTATE MANAGEMENT</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="marketing-consult" data-label="MARKETING CONSULT">MARKETING CONSULT</button>
+                            <button type="button" class="kit-modal-dropdown-option" role="option" data-value="creative-direction" data-label="CREATIVE DIRECTION">CREATIVE DIRECTION</button>
+                        </div>
+                        <div class="kit-modal-custom-scrollbar" aria-hidden="true">
+                            <div class="kit-modal-scrollbar-track">
+                                <div class="kit-modal-scrollbar-thumb"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="kit-modal-row kit-modal-timeslot">
+                <div class="kit-modal-dropdown kit-modal-date" data-name="date">
+                    <button type="button" class="kit-modal-dropdown-trigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Date">
+                        <span class="kit-modal-dropdown-label"></span>
+                        <span class="kit-modal-dropdown-arrow" aria-hidden="true"><svg class="kit-caret" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><use href="#kit-caret"/></svg></span>
+                    </button>
+                    <div class="kit-modal-dropdown-list-outer">
+                        <div class="kit-modal-dropdown-list" role="listbox"></div>
+                        <div class="kit-modal-custom-scrollbar" aria-hidden="true">
+                            <div class="kit-modal-scrollbar-track">
+                                <div class="kit-modal-scrollbar-thumb"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="kit-modal-dropdown kit-modal-time" data-name="time">
+                    <button type="button" class="kit-modal-dropdown-trigger" aria-expanded="false" aria-haspopup="listbox" aria-label="Time">
+                        <span class="kit-modal-dropdown-label">11:00</span>
+                        <span class="kit-modal-dropdown-arrow" aria-hidden="true"><svg class="kit-caret" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><use href="#kit-caret"/></svg></span>
+                    </button>
+                    <div class="kit-modal-dropdown-list" role="listbox">
+                        <button type="button" class="kit-modal-dropdown-option" role="option" data-value="11:00" data-label="11:00">11:00</button>
+                        <button type="button" class="kit-modal-dropdown-option" role="option" data-value="15:00" data-label="15:00">15:00</button>
+                    </div>
+                </div>
+            </div>
+            <div class="kit-modal-row">
+                <input type="hidden" id="bookingService" value="">
+                <input type="hidden" id="bookingDate" value="">
+                <input type="hidden" id="bookingTime" value="11:00">
+                <button type="button" id="bookingSubmit" class="kit-modal-submit">
+                    <span>COMPLETE</span>
+                    <span class="kit-modal-submit-icon" aria-hidden="true">
+                        <svg class="kit-caret kit-caret-right" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><use href="#kit-caret"/></svg>
+                    </span>
+                </button>
+            </div>
+            <div id="bookingMessage" class="booking-message"></div>
+            <p hidden><label>Don't fill this out: <input type="text" id="bookingBotField" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+            <p class="booking-privacy-note" style="margin:12px 0 0;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;opacity:0.55;">We use your details only to reply to your enquiry. Email <a href="mailto:hello@cappuccinostudiox.com" style="color:inherit;">hello@cappuccinostudiox.com</a> to request deletion.</p>
+        </div>
+    </div>
+    <script src="js/inline/booking-1.js"></script>
+    <script type="module" src="js/pageTransition.js"></script>
+    <script type="module" src="js/pages/booking.js"></script>
+</body>
+</html>

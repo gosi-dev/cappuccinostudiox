@@ -1,0 +1,935 @@
+/**
+ * UI Kit — Inter (Google Fonts), yellow/red on dark. Book A Session modal + base components.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+html, body, * { font-family: 'Inter', sans-serif !important; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --kit-bg: #0a0a0a;
+    --kit-yellow: #FFF212;
+    --kit-red: #E70017;
+    --kit-muted: rgba(255, 242, 18, 0.5);
+}
+
+/* Nav-style flash keyframes (match Cappuccino Studiox dropdown) */
+@keyframes kitCameraFlashIn {
+    0% { opacity: 0; }
+    25% { opacity: 0; }
+    50% { opacity: 1; }
+    75% { opacity: 1; }
+    100% { opacity: 1; }
+}
+@keyframes kitCameraFlashOut {
+    0% { opacity: 1; }
+    25% { opacity: 1; }
+    50% { opacity: 0; }
+    75% { opacity: 0; }
+    100% { opacity: 0; }
+}
+@keyframes kitWhiteFlashIn {
+    0% { opacity: 1; }
+    25% { opacity: 0; }
+    50% { opacity: 1; }
+    75% { opacity: 0; }
+    100% { opacity: 0; }
+}
+@keyframes kitWhiteFlashOut {
+    0% { opacity: 0; }
+    25% { opacity: 1; }
+    50% { opacity: 0; }
+    75% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+body {
+    font-family: 'Code Saver', monospace;
+    font-weight: normal;
+    text-transform: uppercase;
+    background: var(--kit-bg);
+    color: var(--kit-yellow);
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+    line-height: 1.4;
+    overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ----- Book A Session Modal ----- */
+.kit-modal-wrap {
+    background: transparent;
+    padding: 0;
+    max-width: 320px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Header: yellow fill, yellow outline (same padding as other rows) */
+.kit-modal-label {
+    font-family: 'Code Saver', monospace;
+    font-weight: normal;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    text-align: left;
+    margin-bottom: 0;
+    padding: 15px;
+    background: var(--kit-yellow);
+    border: 2px solid var(--kit-yellow);
+    color: var(--kit-red);
+    width: 100%;
+    transition: opacity 0.2s ease;
+}
+
+.kit-modal-row {
+    width: 100%;
+    transition: opacity 0.2s ease;
+}
+
+/* When a dropdown is open (clicked to drop down), fade the rest to 0%. When closed (roll up), class is removed and everything returns to default. */
+.kit-modal-wrap.kit-dropdown-open .kit-modal-label {
+    opacity: 0;
+}
+
+.kit-modal-wrap.kit-dropdown-open .kit-modal-row:not(.kit-dropdown-active) {
+    opacity: 0;
+}
+
+/* Date/time row: when date is dropped down, hide time; when time is dropped down, hide date */
+.kit-modal-date,
+.kit-modal-time {
+    transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s ease;
+}
+.kit-modal-row.kit-dropdown-date .kit-modal-time {
+    opacity: 0;
+}
+
+.kit-modal-row.kit-dropdown-time .kit-modal-date {
+    opacity: 0;
+}
+
+/* Single border between name and email: overlap by 2px so borders don't double */
+.kit-modal-wrap > .kit-modal-row:nth-child(2) {
+    margin-bottom: -2px;
+}
+
+/* 0 gap: header, name, email. Equal .5rem above: choose a service, date/time, complete. */
+.kit-modal-wrap > .kit-modal-row:nth-child(4),
+.kit-modal-wrap > .kit-modal-row:nth-child(5),
+.kit-modal-wrap > .kit-modal-row:nth-child(6) {
+    margin-top: 0.5rem;
+}
+
+.kit-modal-input,
+.kit-modal-submit {
+    width: 100%;
+    font-family: 'Code Saver', monospace;
+    font-weight: normal;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    background: var(--kit-red);
+    border: 2px solid var(--kit-yellow);
+    color: var(--kit-yellow);
+    padding: 15px;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+/* Inputs: no hover. Default = yellow text 50% opacity. Filled / Active / Focus = red bg, yellow text */
+.kit-modal-input {
+    color: rgba(255, 242, 18, 0.5);
+}
+.kit-modal-input:active,
+.kit-modal-input:focus,
+.kit-modal-input:not(:placeholder-shown) {
+    background-color: var(--kit-red);
+    color: var(--kit-yellow);
+    border-color: var(--kit-yellow);
+    outline: none;
+    box-shadow: none;
+}
+
+/* Filled state: same as active/focus when value is from autofill or paste */
+.kit-modal-input:-webkit-autofill,
+.kit-modal-input:-webkit-autofill:hover,
+.kit-modal-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--kit-yellow);
+    -webkit-box-shadow: 0 0 0 1000px var(--kit-red) inset;
+    box-shadow: 0 0 0 1000px var(--kit-red) inset;
+}
+
+.kit-modal-input::placeholder {
+    color: rgba(255, 242, 18, 0.5);
+}
+.kit-modal-input:active::placeholder,
+.kit-modal-input:focus::placeholder {
+    color: var(--kit-yellow);
+}
+.kit-modal-input:not(:placeholder-shown)::placeholder {
+    color: transparent;
+}
+
+/* Dropdown trigger: open state = yellow bg, red text (matches former select focus) */
+.kit-modal-dropdown.open .kit-modal-dropdown-trigger {
+    background-color: var(--kit-yellow);
+    color: var(--kit-red);
+    border-color: var(--kit-yellow);
+    outline: none;
+    box-shadow: none;
+}
+
+/* Complete button: Hover = yellow bg, red text. Click/Press feedback = white bg, red text (no white border) */
+.kit-modal-submit:hover {
+    background-color: var(--kit-yellow);
+    color: var(--kit-red);
+    border-color: var(--kit-yellow);
+}
+
+.kit-modal-submit:active,
+.kit-modal-submit.touch-active {
+    background-color: #ffffff;
+    color: var(--kit-red);
+    border-color: #ffffff;
+    outline: none;
+    box-shadow: none;
+}
+
+.kit-modal-input[type="email"] {
+    text-transform: lowercase;
+}
+
+.kit-modal-input {
+    background-image: none;
+    padding-right: 15px;
+}
+
+/* Custom dropdown (nav-style flash + stagger, same vertical spacing as modal) */
+.kit-modal-dropdown {
+    position: relative;
+    width: 100%;
+    overflow: visible;
+}
+
+.kit-modal-dropdown-trigger {
+    width: 100%;
+    font-family: 'Code Saver', monospace;
+    font-weight: normal;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    text-align: left;
+    background: var(--kit-red);
+    border: 2px solid var(--kit-yellow);
+    color: var(--kit-yellow);
+    padding: 15px;
+    cursor: pointer;
+    appearance: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.kit-modal-dropdown-trigger:hover {
+    background-color: var(--kit-yellow);
+    color: var(--kit-red);
+    border-color: var(--kit-yellow);
+}
+/* Caret: one shape, four orientations (symbol #kit-caret).
+   Default = Caret Down; Up = flip vertical; Right = 90° anti-clockwise; Left = 90° clockwise. */
+.kit-modal-dropdown-trigger {
+    gap: 0.625rem;
+    align-items: center;
+}
+.kit-modal-dropdown-trigger .kit-modal-dropdown-arrow {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+.kit-caret,
+.kit-modal-dropdown-trigger .kit-modal-dropdown-arrow .kit-caret {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+    display: block;
+    vertical-align: middle;
+}
+/* Caret orientations (default is Down) */
+.kit-caret-up { transform: rotate(180deg); }
+.kit-caret-right { transform: rotate(-90deg); }
+.kit-caret-left { transform: rotate(90deg); }
+.kit-modal-dropdown.open .kit-modal-dropdown-trigger .kit-modal-dropdown-arrow {
+    transform: rotate(180deg); /* Caret Up when dropdown open */
+}
+/* Rollup (date, time, tier): caret Up when closed, Down when open */
+.kit-modal-dropdown.kit-modal-date .kit-modal-dropdown-trigger .kit-modal-dropdown-arrow,
+.kit-modal-dropdown.kit-modal-time .kit-modal-dropdown-trigger .kit-modal-dropdown-arrow,
+.kit-modal-dropdown.kit-modal-tier .kit-modal-dropdown-trigger .kit-modal-dropdown-arrow {
+    transform: rotate(180deg);
+}
+.kit-modal-dropdown.kit-modal-date.open .kit-modal-dropdown-trigger .kit-modal-dropdown-arrow,
+.kit-modal-dropdown.kit-modal-time.open .kit-modal-dropdown-trigger .kit-modal-dropdown-arrow,
+.kit-modal-dropdown.kit-modal-tier.open .kit-modal-dropdown-trigger .kit-modal-dropdown-arrow {
+    transform: rotate(0deg);
+}
+
+/* Wrapper: trigger+list duo; scroll indicator .8rem to the right of list (service only) */
+.kit-modal-dropdown-list-outer {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: calc(-6px - 0.8rem);
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0.8rem;
+    z-index: 10;
+    max-height: 0;
+    overflow: visible;
+    opacity: 0;
+    pointer-events: none;
+    transition: max-height 0.01ms, opacity 0.01ms;
+}
+.kit-modal-dropdown.open .kit-modal-dropdown-list-outer {
+    height: 168px;
+    max-height: 168px;
+    opacity: 1;
+    overflow: visible;
+    pointer-events: auto;
+}
+.kit-modal-dropdown-list-outer .kit-modal-dropdown-list {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    margin: 0;
+    margin-top: 0;
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 0;
+    direction: ltr;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: y mandatory;
+}
+.kit-modal-dropdown-list-outer .kit-modal-dropdown-list::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+.kit-modal-dropdown.open .kit-modal-dropdown-list-outer .kit-modal-dropdown-list {
+    max-height: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+/* List-outer options: snap, natural height, aligned right (service 30ch, date 12ch) */
+.kit-modal-dropdown-list-outer .kit-modal-dropdown-list .kit-modal-dropdown-option {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    flex: 0 0 auto;
+    width: 30ch;
+    box-sizing: content-box;
+    min-height: 0;
+    line-height: 1.25;
+    align-self: flex-end;
+}
+.kit-modal-dropdown.kit-modal-date .kit-modal-dropdown-list-outer .kit-modal-dropdown-list .kit-modal-dropdown-option {
+    width: 12ch;
+}
+/* Custom scrollbar: 6px circle, same row as list (flex sibling so same top/height) */
+.kit-modal-custom-scrollbar {
+    width: 6px;
+    flex-shrink: 0;
+    position: relative;
+    display: none;
+}
+.kit-modal-dropdown.open .kit-modal-dropdown-list-outer .kit-modal-custom-scrollbar {
+    display: block;
+}
+/* Date & time: rollup (options above trigger), animate list from bottom up */
+.kit-modal-dropdown.kit-modal-date .kit-modal-dropdown-list-outer,
+.kit-modal-dropdown.kit-modal-time .kit-modal-dropdown-list,
+.kit-modal-dropdown.kit-modal-tier .kit-modal-dropdown-list {
+    top: auto;
+    bottom: 100%;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    transform-origin: bottom;
+}
+.kit-modal-dropdown.kit-modal-date .kit-modal-dropdown-list-outer .kit-modal-dropdown-list {
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.2s ease, opacity 0.01ms, max-height 0.01ms;
+}
+/* date open: scaleY(1) set by JS after measure so list reveals bottom → top (like time) */
+/* date scrollbar appears last: fade in after list reveal */
+.kit-modal-dropdown.kit-modal-date .kit-modal-dropdown-list-outer .kit-modal-custom-scrollbar {
+    opacity: 0;
+}
+.kit-modal-dropdown.kit-modal-date.open .kit-modal-dropdown-list-outer .kit-modal-custom-scrollbar {
+    opacity: 1;
+    transition: opacity 0.15s ease 0.2s;
+}
+/* Date: first 3 options appear in sequence bottom → top (like time’s 2 options) */
+/* All date options: start hidden, then visible when open (first 3 staggered, rest after) */
+.kit-modal-dropdown.kit-modal-date .kit-modal-dropdown-list-outer .kit-modal-dropdown-list .kit-modal-dropdown-option {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.kit-modal-dropdown.kit-modal-date.open .kit-modal-dropdown-list-outer .kit-modal-dropdown-list .kit-modal-dropdown-option {
+    opacity: 1;
+    transform: translateY(0);
+}
+.kit-modal-dropdown.kit-modal-date.open .kit-modal-dropdown-list-outer .kit-modal-dropdown-list .kit-modal-dropdown-option:nth-child(3) {
+    transition-delay: 0;
+}
+.kit-modal-dropdown.kit-modal-date.open .kit-modal-dropdown-list-outer .kit-modal-dropdown-list .kit-modal-dropdown-option:nth-child(2) {
+    transition-delay: 0.07s;
+}
+.kit-modal-dropdown.kit-modal-date.open .kit-modal-dropdown-list-outer .kit-modal-dropdown-list .kit-modal-dropdown-option:nth-child(1) {
+    transition-delay: 0.14s;
+}
+.kit-modal-dropdown.kit-modal-date.open .kit-modal-dropdown-list-outer .kit-modal-dropdown-list .kit-modal-dropdown-option:nth-child(n+4) {
+    transition-delay: 0.21s;
+}
+.kit-modal-dropdown.kit-modal-time .kit-modal-dropdown-list,
+.kit-modal-dropdown.kit-modal-tier .kit-modal-dropdown-list {
+    flex-direction: column-reverse;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.2s ease, opacity 0.01ms, max-height 0.01ms;
+}
+.kit-modal-dropdown.kit-modal-time.open .kit-modal-dropdown-list,
+.kit-modal-dropdown.kit-modal-tier.open .kit-modal-dropdown-list {
+    transform: scaleY(1);
+}
+.kit-modal-scrollbar-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    cursor: pointer;
+    background: transparent;
+    box-sizing: border-box;
+}
+.kit-modal-scrollbar-track::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 0.5px;
+    transform: translateX(-50%);
+    background: var(--kit-yellow);
+}
+.kit-modal-scrollbar-thumb {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--kit-yellow);
+    cursor: grab;
+    pointer-events: auto;
+}
+.kit-modal-scrollbar-thumb:active {
+    cursor: grabbing;
+}
+
+.kit-modal-dropdown-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    z-index: 10;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.01ms, opacity 0.01ms;
+    direction: rtl;
+}
+.kit-modal-dropdown-list .kit-modal-dropdown-option {
+    direction: ltr;
+}
+
+/* Choose a service: option width 30ch + padding, aligned right */
+.kit-modal-dropdown.kit-modal-select .kit-modal-dropdown-list {
+    align-items: flex-start;
+}
+.kit-modal-dropdown.kit-modal-select .kit-modal-dropdown-option {
+    width: 30ch;
+    box-sizing: content-box;
+    flex: 0 0 auto;
+}
+
+/* Show max 3 options at a time; option padding/height matches trigger block */
+.kit-modal-dropdown.open .kit-modal-dropdown-list {
+    max-height: 166px;
+    opacity: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Scrollbar on the left: track invisible, thumb yellow 6px sharp corners, no arrows */
+.kit-modal-dropdown-list {
+    scrollbar-width: thin;
+    scrollbar-color: var(--kit-yellow) transparent;
+}
+/* Entire scrollbar: 6px wide, no extra space for buttons */
+.kit-modal-dropdown-list::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+/* Remove arrow/button space completely (all sides) */
+.kit-modal-dropdown-list::-webkit-scrollbar-button:vertical:start,
+.kit-modal-dropdown-list::-webkit-scrollbar-button:vertical:end,
+.kit-modal-dropdown-list::-webkit-scrollbar-button:horizontal:start,
+.kit-modal-dropdown-list::-webkit-scrollbar-button:horizontal:end {
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    max-height: 0 !important;
+    max-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    visibility: hidden !important;
+}
+.kit-modal-dropdown-list::-webkit-scrollbar-button:vertical,
+.kit-modal-dropdown-list::-webkit-scrollbar-button:horizontal,
+.kit-modal-dropdown-list::-webkit-scrollbar-button {
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    max-height: 0 !important;
+    max-width: 0 !important;
+    visibility: hidden !important;
+}
+.kit-modal-dropdown-list::-webkit-scrollbar-corner {
+    display: none !important;
+    background: transparent !important;
+}
+.kit-modal-dropdown-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+/* Thumb: sharp corners (override any browser default rounding) */
+.kit-modal-dropdown-list::-webkit-scrollbar-thumb {
+    width: 6px;
+    min-height: 6px;
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    background: var(--kit-yellow);
+}
+.kit-modal-dropdown-list::-webkit-scrollbar-thumb:hover {
+    background: var(--kit-yellow);
+}
+
+.kit-modal-dropdown-option {
+    display: none;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 15px;
+    font-family: 'Code Saver', monospace;
+    font-weight: normal;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    text-align: left;
+    background: var(--kit-red);
+    border: 2px solid var(--kit-yellow);
+    color: var(--kit-yellow);
+    cursor: pointer;
+    opacity: 0;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.kit-modal-dropdown-option::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+.kit-modal-dropdown.open .kit-modal-dropdown-option {
+    display: flex;
+    animation: kitCameraFlashIn 0.2s steps(4, end) forwards;
+    animation-delay: var(--flash-delay, 0s);
+}
+.kit-modal-dropdown.open .kit-modal-dropdown-option::before {
+    animation: kitWhiteFlashIn 0.2s steps(4, end) forwards;
+    animation-delay: var(--flash-delay, 0s);
+}
+.kit-modal-dropdown-option:hover {
+    background: var(--kit-yellow);
+    color: var(--kit-red);
+    border-color: var(--kit-yellow);
+}
+.kit-modal-dropdown-option:active {
+    background: #ffffff;
+    color: var(--kit-red);
+    border-color: #ffffff;
+}
+
+/* Time-slot row: 60-65% date, 35-40% time, 8px gutter */
+.kit-modal-timeslot {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.kit-modal-date {
+    flex: 0 0 calc(65% - 4px);
+    min-width: 0;
+}
+
+.kit-modal-time {
+    flex: 0 0 calc(35% - 4px);
+    min-width: 0;
+}
+
+/* Tier row: Choose Tier dropdown + Price info block (waitlist) */
+.kit-modal-tier-row {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+}
+
+.kit-modal-dropdown.kit-modal-tier {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.kit-modal-price-block {
+    flex: 0 0 calc(35% - 4px - 2ch);
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    font-size: inherit;
+    background: var(--kit-red);
+    border: 2px solid var(--kit-yellow);
+    color: var(--kit-yellow);
+    box-sizing: border-box;
+    cursor: default;
+}
+
+.kit-modal-price-value {
+    font-family: inherit;
+}
+
+/* Submit row: full width, COMPLETE left, right-pointing triangle right */
+.kit-modal-submit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.625rem;
+    cursor: pointer;
+    background-image: none;
+    padding-right: 15px;
+}
+.kit-modal-submit .kit-modal-submit-icon {
+    width: 10px;
+    height: 10px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kit-modal-submit-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--kit-yellow);
+    transition: fill 0.2s;
+    display: block;
+    vertical-align: middle;
+}
+
+.kit-modal-submit:hover .kit-modal-submit-icon svg,
+.kit-modal-submit:active .kit-modal-submit-icon svg,
+.kit-modal-submit.touch-active .kit-modal-submit-icon svg {
+    fill: var(--kit-red);
+}
+
+/* Select label: no extra margin so row spacing matches others */
+.kit-modal-select-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--kit-yellow);
+    margin: 0 0 4px 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Responsive: mobile styles when viewport is narrow (e.g. when inspecting) */
+@media (max-width: 520px) {
+    .kit-modal-wrap {
+        padding: 0;
+        max-width: 100%;
+        width: 100%;
+    }
+    .kit-modal-label {
+        padding: 12px;
+    }
+    .kit-modal-input,
+    .kit-modal-submit {
+        font-size: 0.75rem;
+        padding: 12px 12px 12px 12px;
+        padding-right: 36px;
+    }
+    .kit-modal-dropdown-trigger {
+        font-size: 0.75rem;
+        padding: 12px 15px 12px 12px;
+    }
+    .kit-modal-dropdown-option {
+        font-size: 0.75rem;
+        padding: 12px;
+    }
+    .kit-modal-dropdown.open .kit-modal-dropdown-list {
+        max-height: 142px;
+    }
+    .kit-modal-dropdown-list-outer {
+        margin-top: 0.5rem;
+    }
+    .kit-modal-dropdown.kit-modal-date .kit-modal-dropdown-list-outer {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+    }
+    .kit-modal-dropdown.open .kit-modal-dropdown-list-outer {
+        height: 156px;
+        max-height: 156px;
+    }
+    .kit-modal-dropdown-list-outer .kit-modal-dropdown-list {
+        gap: 0.5rem;
+    }
+    .kit-modal-input {
+        padding-right: 12px;
+    }
+    .kit-modal-submit {
+        padding-right: 12px;
+    }
+}
+
+/* Bottom left: UI Kit + description (same padding as switch: 2rem) */
+.kit-floating-description {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 1000;
+}
+
+.kit-floating-description .kit-page-title {
+    margin-bottom: 0.25rem;
+}
+
+/* Top right: component dropdown (same padding: 2rem) */
+.kit-floating-component-dropdown {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 1000;
+}
+
+.kit-component-dropdown {
+    position: relative;
+}
+
+.kit-component-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.625rem;
+    font-family: 'Code Saver', monospace;
+    font-weight: normal;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--kit-yellow);
+    background: var(--kit-red);
+    color: var(--kit-yellow);
+    cursor: pointer;
+    min-width: 12ch;
+    transition: background 0.2s, color 0.2s;
+}
+
+.kit-component-dropdown-trigger:hover {
+    background: var(--kit-yellow);
+    color: var(--kit-red);
+}
+
+.kit-component-dropdown .kit-component-dropdown-arrow {
+    width: 10px;
+    height: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+.kit-component-dropdown .kit-component-dropdown-arrow svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+.kit-component-dropdown.open .kit-component-dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.kit-component-dropdown-list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    min-width: 100%;
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    z-index: 10;
+    border: 2px solid var(--kit-yellow);
+    background: var(--kit-bg);
+    padding: 0.5rem;
+}
+
+.kit-component-dropdown.open .kit-component-dropdown-list {
+    display: flex;
+}
+
+.kit-component-dropdown-option {
+    font-family: 'Code Saver', monospace;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid var(--kit-yellow);
+    background: var(--kit-red);
+    color: var(--kit-yellow);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.kit-component-dropdown-option:hover {
+    background: var(--kit-yellow);
+    color: var(--kit-red);
+}
+
+/* Component placeholders (for Buttons, Inputs, Caret until implemented) */
+.kit-component-placeholder {
+    font-family: 'Code Saver', monospace;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--kit-muted);
+    padding: 2rem;
+    text-align: center;
+}
+
+.kit-pages {
+    position: relative;
+}
+
+.kit-page {
+    display: block;
+}
+
+.kit-page[hidden] {
+    display: none !important;
+}
+
+/* ----- Preview: single responsive view (resize or inspect for mobile) ----- */
+.kit-page-preview {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background: var(--kit-bg);
+}
+
+.kit-viewport-wrap-preview {
+    width: 100%;
+    min-height: 100%;
+    border: none;
+    background: var(--kit-bg);
+    display: flex;
+    flex-direction: column;
+}
+
+.kit-viewport-wrap-preview .kit-viewport-label {
+    flex: 0 0 auto;
+}
+
+.kit-viewport-wrap-preview .kit-viewport-preview {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 0;
+    max-width: none;
+    max-height: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.kit-viewport-preview .kit-component {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.kit-viewport-wrap {
+    border: 2px solid var(--kit-muted);
+    background: var(--kit-bg);
+}
+
+.kit-viewport-label {
+    font-size: 0.75rem;
+    color: var(--kit-muted);
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--kit-muted);
+}
+
+.kit-viewport {
+    background: var(--kit-bg);
+}
+
+.kit-page-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.kit-page-intro {
+    font-size: 0.8rem;
+    color: var(--kit-muted);
+    margin-bottom: 0;
+}

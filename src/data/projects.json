@@ -1,0 +1,802 @@
+[
+  {
+    "id": "1",
+    "name": "LUCID JUNGLES",
+    "items": [
+      {
+        "src": "/assets/projects/1/mlqy4f1j-wf8oz3-NMS_2_merged.pdf",
+        "name": "THE APPROACH",
+        "type": "pdf",
+        "storyline": "We took Lucid Jungles to the National Museum of Nigeria, then rebuilt the Old Secretariat inside it — a heritage building the city had left standing empty.\n\nThat build was the pitch to the NCMM: reopen the physical space for events, with the digital world as the draw. The space reopened.",
+        "thumbnail": "/assets/projects/1/Cover.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": false,
+        "cardTitle": "Showcase — National Museum"
+      },
+      {
+        "src": "/assets/projects/1/mlrpcyff-w2r8l0-IMG_9213.JPG",
+        "name": "THE APPROACH",
+        "type": "image",
+        "storyline": "A history lesson you walk through: the Old Secretariat restored in 3D and gamified, rooms and sound doing the work a floor plan cannot. An historian guiding you through the experience. The event gallery from that showcase sits beside it.",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "cardTitle": "Old Secretariat — heritage build"
+      },
+      {
+        "src": "/assets/projects/1/mlprh4vd-796s1o-clip.webm",
+        "name": "STUDIO ROLE",
+        "type": "video",
+        "trimEnd": 22.6,
+        "storyline": "Creative technology · System design · Launch planning · Exhibition build\n\nWe set what the platform says and how it launches: the product idea, the technology behind it, the launch plan and the exhibition build.\n\nThe world and the event match because the same room built both.",
+        "trimStart": 0,
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "thumbnail": "/assets/projects/1/posters/mlprh4vd-796s1o-clip.jpg",
+        "cardTitle": "The platform, running live"
+      },
+      {
+        "src": "/assets/projects/1/lucid-dev-demo.mp4",
+        "name": "STUDIO ROLE",
+        "cardTitle": "Build demo — split",
+        "type": "video",
+        "portrait": true,
+        "trimStart": 0,
+        "trimEnd": null,
+        "storyline": "A split-screen build log: the game running on top, the terrain and systems underneath, with our voiceover on what it actually took.\n\nEvery space, sound and interactive piece is modular, so a new space does not mean starting from zero.",
+        "thumbnail": "/assets/projects/1/posters/lucid-dev-demo.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/1/lucid-brand-film.mp4",
+        "name": "WORLD BUILDING",
+        "cardTitle": "Founders in-world",
+        "type": "video",
+        "portrait": true,
+        "trimStart": 0,
+        "trimEnd": null,
+        "storyline": "Two founders as their Lucid Jungles avatars, standing inside the world they built, talking about why they refused to drop it.\n\nHand-drawn 2D characters inside a 3D environment, with sound design doing half the storytelling.",
+        "thumbnail": "/assets/projects/1/posters/lucid-brand-film.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/1/lucid-street-film.mp4",
+        "name": "WORLD BUILDING /2",
+        "cardTitle": "Traffic — 2D short",
+        "type": "video",
+        "portrait": true,
+        "trimStart": 0,
+        "trimEnd": null,
+        "storyline": "Lagos from above in our signature yellow and blue: a materials run, a traffic jam, and a jumping spider that highlights our gamified logic and explains the hold-up.\n\nThe world introduced as a series of videos and short films rather than a spec sheet.",
+        "thumbnail": "/assets/projects/1/posters/lucid-street-film.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/1/mlrs4ur4-n61ave-vlc-record-2026-02-18-09h34m49s-Lucid_Jungles_Trailer.mp4-.mp4",
+        "name": "WHY IT MATTERS",
+        "type": "video",
+        "trimEnd": 20.9,
+        "storyline": "Lucid Jungles proves this kind of work can be built and sold, not just shown. It is the base we now use for brand activations and cultural projects.\n\nThis is a cut from the MVP trailer, also designed in-house: the world introduced as a product, before anyone had walked into it.",
+        "trimStart": 0,
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "thumbnail": "/assets/projects/1/posters/mlrs4ur4-n61ave-vlc-record-2026-02-18-09h34m49s-Lucid_Jungles_Trailer.mp4-.jpg",
+        "cardTitle": "MVP trailer"
+      },
+      {
+        "src": "/assets/projects/1/lucid-industry-talk.mp4",
+        "name": "WHY IT MATTERS /2",
+        "cardTitle": "Panel — Creative Market",
+        "type": "video",
+        "portrait": false,
+        "trimStart": 0,
+        "trimEnd": null,
+        "storyline": "On stage at Africa Creative Market Lagos 25’: our founders on what gaming in Nigeria is worth and what it will take to build it.\n\nShot and cut by the studio. Same argument as the platform, said out loud.",
+        "thumbnail": "/assets/projects/1/posters/lucid-industry-talk.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      }
+    ],
+    "storyline": "We built Lucid Jungles ourselves: a working piece of technology and a product we could sell. A digital copy of the physical world you can explore, a set of rooms you walk into, where sound, visuals and movement answer back.\n\nThen we launched it in public: a showcase at the National Museum of Nigeria, and a heritage build of the Old Secretariat that we pitched to the NCMM as a reason to reopen the space. It reopened.",
+    "assets": [],
+    "thumbnail": "/assets/projects/1/thumbnail.jpg",
+    "storyline_title": "A world we built in-house, now open to brands",
+    "default_background_url": null,
+    "layout": "story",
+    "caseStudy": {
+      "title": "LUCID JUNGLES",
+      "kicker": "Case Study 01 / Interactive Worlds",
+      "tagline": "A digital world you walk into, where sound, visuals and movement answer back.",
+      "discipline": "Interactive Worlds",
+      "heroImage": "/assets/projects/1/thumbnail.jpg",
+      "heroPosition": "50% 45%",
+      "nextProjectId": "3",
+      "headline": "Built a world in-house, then sold our services and the world itself as a bookable space.",
+      "client": "Lucid Jungles",
+      "scope": [
+        "World and system design",
+        "Creative technology",
+        "2D / 3D animation",
+        "Film and sound design",
+        "Exhibition, heritage and launch"
+      ],
+      "format": "Platform film, 2D / 3D animation, build demo, panel talk, print",
+      "status": "Delivered",
+      "chapterLayouts": {
+        "Studio Role": "aside"
+      }
+    }
+  },
+  {
+    "id": "3",
+    "name": "ADIDAS — LEKKI FLAGSHIP",
+    "items": [
+      {
+        "src": "/assets/projects/3/mm4939wt-4rl6zi-Fn_1.png",
+        "name": "THE APPROACH",
+        "type": "image",
+        "storyline": "We designed an event that feels light and open, the kind of room that lifts you as you walk in. That covered the space, the objects on display, the printed pieces and a magazine that came out after opening night.",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "cardTitle": "Store set — front elevation"
+      },
+      {
+        "src": "/assets/projects/3/mm0y0bbk-gosqww-Set.pdf",
+        "name": "THE APPROACH /2",
+        "type": "pdf",
+        "storyline": "We designed the exhibition set for the stakeholders launch dinner, the layout architecturally designed for the team to build at the venue, we designed the exhibition print, and managed the installation on-site.",
+        "thumbnail": "/assets/projects/3/PDF Thumbnail.png",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "cardTitle": "Dinner layout — opening night"
+      },
+      {
+        "src": "/assets/projects/3/mm1fkmmb-7o53ea-Horizontal.jpg",
+        "name": "STUDIO ROLE",
+        "type": "image",
+        "storyline": "Exhibition design · Spatial storytelling · Installation direction\n\nWorking with OSENGWA, we shaped the story, planned the layout and the flow, produced the physical pieces and ran the build on site.\n\nAlso we spotlighted Bonzo our in-house artist at the event, managed his stall where he customised shoes for interested customers.",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "cardTitle": "Exhibition build — OSENGWA"
+      },
+      {
+        "src": "/assets/projects/3/mm4kf8ji-lz6j1c-ezgif.com-speed__2_.gif",
+        "name": "WHY IT MATTERS",
+        "type": "image",
+        "storyline": "It shows a store opening can be about people and process, not just product. The story kept working long after the night was over.",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "cardTitle": "Launch animation"
+      },
+      {
+        "src": "/assets/projects/3/adidas-launch-doc.mp4",
+        "name": "WHY IT MATTERS /2",
+        "cardTitle": "Launch film — the makers",
+        "type": "video",
+        "portrait": true,
+        "trimStart": 0,
+        "trimEnd": null,
+        "storyline": "The launch documented from the inside: the launch experience, shoes being painted on the shop floor, the team keeping the room moving on the night.\n\nA voiceover from Bonzo the artist carries it — his idea for the customisation kit, where it came from, and what it felt like to see it land at Where Dreams Take Flight.",
+        "thumbnail": "/assets/projects/3/posters/adidas-launch-doc.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      }
+    ],
+    "storyline": "Adidas opened a flagship store in Lekki, Lagos, and wanted the opening to feel like an event, not a rollout. We turned the brand line “Where Dreams Take Flight” into a space people could walk through.\n\nThe show was about the people who built the store and the work behind it, so the story stayed alive after opening night.",
+    "assets": [],
+    "thumbnail": "/assets/projects/3/thumbnail.png",
+    "storyline_title": "Opening a flagship store like an exhibition",
+    "default_background_url": null,
+    "layout": "story",
+    "caseStudy": {
+      "title": "ADIDAS — LEKKI FLAGSHIP",
+      "kicker": "Case Study 03 / Store Launch",
+      "tagline": "A launch exhibition for the Adidas flagship in Lekki, Lagos, about the people who made the store.",
+      "discipline": "Store Launch & Exhibition Design",
+      "heroImage": "/assets/projects/3/thumbnail.png",
+      "heroPosition": "50% 45%",
+      "nextProjectId": "4",
+      "headline": "Made a store opening feel like an exhibition.",
+      "client": "Adidas",
+      "scope": [
+        "Event concept",
+        "Exhibition and set design",
+        "Live art direction",
+        "Film documentation",
+        "Print and layout"
+      ],
+      "format": "Launch film, exhibition design, live painting, print",
+      "status": "Delivered",
+      "chapterLayouts": {
+        "Studio Role": "aside"
+      }
+    }
+  },
+  {
+    "id": "4",
+    "name": "BONZO — ENTER THE JUNGLE",
+    "items": [
+      {
+        "src": "/assets/projects/4/etj-approach.mp4",
+        "name": "THE APPROACH",
+        "type": "video",
+        "trimEnd": null,
+        "storyline": "“Enter the Jungle” is one story told in several places. Nothing drops on its own: each release is a chapter that sets up the next, so the music, fashion, art, and film all build the same world. We plan what goes out, where and when.",
+        "trimStart": 0,
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "thumbnail": "/assets/projects/4/posters/etj-approach.jpg",
+        "cardTitle": "The seven-channel plan"
+      },
+      {
+        "src": "/assets/projects/4/mls00ztt-zafi1i-Car_Utility_S.mp4",
+        "name": "STUDIO ROLE",
+        "type": "video",
+        "trimEnd": 12.3,
+        "storyline": "World design · Campaign lead · Creative direction · Sound production",
+        "trimStart": 0,
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "thumbnail": "/assets/projects/4/posters/mls00ztt-zafi1i-Car_Utility_S.jpg",
+        "cardTitle": "Car — utility spot"
+      },
+      {
+        "src": "/assets/projects/4/mls01ee4-iucxbo-Interrogation.mp4",
+        "name": "STUDIO ROLE /2",
+        "type": "video",
+        "trimEnd": 14.9,
+        "storyline": "We built the Bonzo world and now lead its direction and roll-out. That means running production across all its channels, keeping the story straight, and mapping how an audience meets it step by step and iterating on the go.",
+        "trimStart": 0,
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "thumbnail": "/assets/projects/4/posters/mls01ee4-iucxbo-Interrogation.jpg",
+        "cardTitle": "Interrogation — spot"
+      },
+      {
+        "src": "/assets/projects/4/etj-ep01.mp4",
+        "name": "ETJ SERIES",
+        "cardTitle": "Ep 01 — the dream again",
+        "type": "video",
+        "portrait": true,
+        "trimStart": 0,
+        "trimEnd": null,
+        "storyline": "Bonzo tells a friend about the dream he keeps having. The friend does not get it. Neither of them says the obvious thing: the dream is the product.\n\nLive action, animation, dialogue and full sound design in one short — the series that explains Enter the Jungle without a brief.",
+        "thumbnail": "/assets/projects/4/posters/etj-ep01.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/4/etj-ep02.mp4",
+        "name": "ETJ SERIES /2",
+        "cardTitle": "Ep 02 — two realities",
+        "type": "video",
+        "portrait": true,
+        "trimStart": 0,
+        "trimEnd": null,
+        "storyline": "Lagos on one side, Lucid Jungles on the other. His waking self describing his dream experiences and exploring its innate connection to his waking reality.\n\nMixed media built to sell a multidimensional idea in under a minute.",
+        "thumbnail": "/assets/projects/4/posters/etj-ep02.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/4/mls02gcd-a41cd3-Jacket_Utility_S.mp4",
+        "name": "WHY IT MATTERS",
+        "type": "video",
+        "trimEnd": 12.3,
+        "storyline": "Bonzo shows a campaign can be built through channels, not just across them. Every piece stands on its own, and every piece makes the rest stronger.",
+        "trimStart": 0,
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "thumbnail": "/assets/projects/4/posters/mls02gcd-a41cd3-Jacket_Utility_S.jpg",
+        "cardTitle": "Jacket — utility spot"
+      },
+      {
+        "src": "/assets/projects/4/etj-gangsta-teaser.mp4",
+        "name": "WHY IT MATTERS /2",
+        "cardTitle": "Gangsta Interlude",
+        "type": "video",
+        "portrait": false,
+        "trimStart": 0,
+        "trimEnd": null,
+        "storyline": "A teaser for one track off the ETJ album, made with AI video: the dream world bleeding into the real one.\n\nSixteen seconds, no shoot, full sound design. An announcement piece that can drop while the next film is still in edit.",
+        "thumbnail": "/assets/projects/4/posters/etj-gangsta-teaser.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      }
+    ],
+    "storyline": "Bonzo is an artist exploring the intersection between the dream world and the physical world, we are designing his view of the dream world as a digital space in Lucid Jungles. Everything ships under one campaign, “Enter the Jungle”, across several channels that interact with each other. The campaign also doubles as an introduction to Lucid Jungles.\n\nThe music feeds the fashion, the building hosts the performance, the book deepens the film. We plan the order of release so each drop sets up the next.",
+    "assets": [],
+    "thumbnail": "/assets/projects/4/thumbnail.JPG",
+    "storyline_title": "One character, several channels: “Enter the Jungle”",
+    "default_background_url": null,
+    "layout": "story",
+    "caseStudy": {
+      "title": "BONZO — ENTER THE JUNGLE",
+      "kicker": "Case Study 04 / Artist World",
+      "tagline": "Music, fashion, film, art, digital architecture: one story, released chapter by chapter.",
+      "discipline": "Artist World & Campaign",
+      "heroImage": "/assets/projects/4/thumbnail.JPG",
+      "heroPosition": "50% 45%",
+      "nextProjectId": "9",
+      "headline": "Built one character across several channels that all interact with each other.",
+      "client": "Bonzo",
+      "scope": [
+        "Artist world building",
+        "Campaign and release strategy",
+        "Film and mixed media",
+        "Sound design",
+        "AI and motion"
+      ],
+      "format": "Mixed-media series, music spots, AI teaser, 2D / 3D motion",
+      "status": "Delivered",
+      "chapterLayouts": {
+        "ETJ Series": "aside-pair"
+      }
+    }
+  },
+  {
+    "id": "9",
+    "name": "HOBA — ADULT CHOCOLATE",
+    "items": [
+      {
+        "src": "/assets/projects/8/hoba-packshot.jpg",
+        "name": "The Approach",
+        "type": "image",
+        "storyline": "The brief: sell an adult chocolate bar without sounding like an advert. So we did not make adverts. We made four episodes people choose to watch.\n\nEach one runs about a minute and ends on the bar with a line that can travel: a poster, a caption, a cut-down ad. This is the packshot everything lands on.",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/8/hoba-ep01.mp4",
+        "name": "The Approach /2",
+        "cardTitle": "Cost of Doing Business",
+        "type": "video",
+        "portrait": true,
+        "trimStart": 0,
+        "trimEnd": null,
+        "storyline": "A man walks into a backstreet corner asking for HOBA. The gatekeeper says he has never heard of it, takes his money, then redirects him. One corner, two actors, one deadpan joke.\n\nIt is built to be cut up: the full episode, the ten-second ad, the caption.",
+        "thumbnail": "/assets/projects/8/posters/hoba-ep01.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/8/HOBA-Screenplay.pdf",
+        "name": "Studio Role",
+        "cardTitle": "The screenplay — all four episodes",
+        "type": "pdf",
+        "storyline": "We wrote, directed, sound-designed and planned the release. The script is written like film, not like advertising, so the drama sets the pace and the bar earns its place.\n\nThis is the first draft we shot from.",
+        "thumbnail": "/assets/projects/8/posters/hoba-screenplay.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/8/hoba-ep02.mp4",
+        "name": "Studio Role /2",
+        "cardTitle": "Supply and Demand",
+        "type": "video",
+        "portrait": true,
+        "trimStart": 0,
+        "trimEnd": null,
+        "storyline": "Episode two: an apothecary, a second bar, and a seller who takes all his money. It is the handover episode, where a rumour becomes something you can buy.",
+        "thumbnail": "/assets/projects/8/posters/hoba-ep02.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/8/hoba-ep03.mp4",
+        "name": "Why It Matters",
+        "cardTitle": "Plead the Fifth",
+        "type": "video",
+        "portrait": true,
+        "trimStart": 0,
+        "trimEnd": null,
+        "storyline": "Episode three shows what the bar does without claiming anything. A phone call, a rival, and a joke do the selling.",
+        "thumbnail": "/assets/projects/8/posters/hoba-ep03.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/8/hoba-ep04.mp4",
+        "name": "Why It Matters /2",
+        "cardTitle": "Dispose the Evidence",
+        "type": "video",
+        "portrait": true,
+        "trimStart": 0,
+        "trimEnd": null,
+        "storyline": "The last episode pays it off: morning light, a wrapper on the floor, and the line the whole campaign was built on.",
+        "thumbnail": "/assets/projects/8/posters/hoba-ep04.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/8/hoba-ep05.mp4",
+        "name": "Why It Matters /3",
+        "cardTitle": "Title card reel",
+        "type": "video",
+        "portrait": true,
+        "trimStart": 0,
+        "trimEnd": null,
+        "storyline": "One title card system, a different punchline each time. This reel runs all five cards back to back.",
+        "thumbnail": "/assets/projects/8/posters/hoba-ep05.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      }
+    ],
+    "storyline": "HOBA makes adult chocolate. The product is legal, the subject is cheeky, and ads cannot say too much. So we did not make ads.\n\nWe made a four-part series called Just Chocolate, Allegedly. A man goes looking for the bar, a gatekeeper pretends not to have it, and a woman already knows what it does. Each episode is about a minute long and ends on the bar.\n\nEvery episode also works on its own: as an ad, as a caption, as a clip an affiliate can post. That is how the story sold the bar without ever sounding like a sales pitch.",
+    "assets": [],
+    "thumbnail": "/assets/projects/8/hoba-cover-square.jpg",
+    "storyline_title": "We turned a chocolate bar into a four-part drama",
+    "default_background_url": "/assets/projects/8/hoba-cover.jpg",
+    "layout": "story",
+    "caseStudy": {
+      "title": "HOBA — ADULT CHOCOLATE",
+      "kicker": "Case Study 06 / Advertising as Experience",
+      "tagline": "A four-part drama that sells a chocolate bar without sounding like an ad.",
+      "client": "HOBA",
+      "year": "2026",
+      "discipline": "Campaign & Series",
+      "scope": [
+        "Campaign strategy",
+        "Creative direction",
+        "Sound design",
+        "Launch planning"
+      ],
+      "format": "4 episodes, social cuts, affiliate campaign",
+      "status": "Delivered",
+      "heroImage": "/assets/projects/8/hoba-cover.jpg",
+      "heroPosition": "50% 45%",
+      "nextProjectId": "8",
+      "headline": "Made the bar the reason to watch, not the thing being sold."
+    }
+  },
+  {
+    "id": "8",
+    "name": "ONYEOMA — INKREECE",
+    "items": [
+      {
+        "src": "/assets/projects/2/mlrw5zon-v80505-Movie_056.mp4",
+        "name": "The Approach",
+        "type": "video",
+        "trimEnd": 10,
+        "storyline": "We treated Onyeoma as an origin story. Instead of another love-song video, we built a mythic 3D world in an anime style: the door into a larger fictional universe.",
+        "trimStart": 0,
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "thumbnail": "/assets/projects/2/posters/mlrw5zon-v80505-Movie_056.jpg",
+        "cardTitle": "Phone box, in 3D"
+      },
+      {
+        "src": "/assets/projects/2/mlrvxw6b-0316sb-vlc-record-2026-02-18-11h10m58s-Onyeoma_Music_Video_Final.mp4-.mp4",
+        "name": "The Approach /2",
+        "type": "video",
+        "trimEnd": 8.7,
+        "storyline": "The roll-out mixed cinematic 3D animation, film shot by hand, collage and fine-art cover design. Every piece fed the same world.",
+        "trimStart": 0,
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "thumbnail": "/assets/projects/2/posters/mlrvxw6b-0316sb-vlc-record-2026-02-18-11h10m58s-Onyeoma_Music_Video_Final.mp4-.jpg",
+        "cardTitle": "The room, on film"
+      },
+      {
+        "src": "/assets/projects/2/mlrwhez0-zn7ycg-Fire_Static_Cam.mp4",
+        "name": "Studio Role",
+        "type": "video",
+        "trimEnd": 15.9,
+        "storyline": "Creative direction · Story design · 3D production · Character design",
+        "trimStart": 0,
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "thumbnail": "/assets/projects/2/posters/mlrwhez0-zn7ycg-Fire_Static_Cam.jpg",
+        "cardTitle": "Fire — static cam"
+      },
+      {
+        "src": "/assets/projects/2/mlsjvenk-v9kiet-Ghost_Dolly.mp4",
+        "name": "Studio Role /2",
+        "type": "video",
+        "trimEnd": 19,
+        "storyline": "We set the look and the rules of the Onyeoma world: the artist’s long-term avatar, the environment around him, the hoverboard object, and the campaign pieces that carry them.",
+        "trimStart": 0,
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "thumbnail": "/assets/projects/2/posters/mlsjvenk-v9kiet-Ghost_Dolly.jpg",
+        "cardTitle": "Ghosts — dolly"
+      },
+      {
+        "src": "/assets/projects/2/mlski633-jeres6-5.png",
+        "name": "Studio Role /3",
+        "type": "image",
+        "storyline": "We stayed from first idea through production, and set the world up so it can grow, and earn, later on.",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": false,
+        "cardTitle": "The questionnaire, filled in by hand"
+      },
+      {
+        "src": "/assets/projects/2/Onyeoma-Questionnaire.pdf",
+        "name": "Studio Role /4",
+        "cardTitle": "The questionnaire",
+        "type": "pdf",
+        "storyline": "",
+        "thumbnail": "/assets/projects/2/posters/onyeoma-questionnaire.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": false,
+        "defaultBackgroundRoster": false
+      },
+      {
+        "src": "/assets/projects/2/Onyeoma-Screenplay.pdf",
+        "name": "Studio Role /5",
+        "cardTitle": "The shooting script",
+        "type": "pdf",
+        "storyline": "",
+        "thumbnail": "/assets/projects/2/posters/onyeoma-screenplay.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": false,
+        "defaultBackgroundRoster": false
+      },
+      {
+        "src": "/assets/projects/2/Onyeoma-Edit-Notes.pdf",
+        "name": "Studio Role /6",
+        "cardTitle": "The edit notes",
+        "type": "pdf",
+        "storyline": "",
+        "thumbnail": "/assets/projects/2/posters/onyeoma-edit-notes.jpg",
+        "storylineTitle": "",
+        "backgroundRoster": false,
+        "defaultBackgroundRoster": false
+      },
+      {
+        "src": "/assets/projects/2/mlsj5ilg-vyls3j-Onyeoma.jpg",
+        "name": "What We Made",
+        "type": "image",
+        "storyline": "The world in one frame: a painted desert, a hoverboard throwing flames, two ghosts at the artist's shoulders. The rules of the campaign are all in here.",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "cardTitle": "Key art — the world"
+      },
+      {
+        "src": "/assets/projects/2/mlskdmw1-j02dro-Skat.jpg",
+        "name": "What We Made /2",
+        "type": "image",
+        "storyline": "Bringing the artist’s love of skating into the brand.",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": false,
+        "cardTitle": "Skate studies"
+      },
+      {
+        "src": "/assets/projects/2/mlskdmw1-4zqgdr-Untitled-2.png",
+        "name": "What We Made /3",
+        "type": "image",
+        "storyline": "Concept sketches of the artist’s character.",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": false,
+        "cardTitle": "Character sheet"
+      },
+      {
+        "src": "/assets/projects/2/mlsk4jua-5iwpze-3.png",
+        "name": "What We Made /4",
+        "type": "image",
+        "storyline": "Collages made as brand assets, so the artist has more to share with his fans.",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": false,
+        "cardTitle": "Collage series"
+      },
+      {
+        "src": "/assets/projects/2/mlrvrwym-1vkoyw-vlc-record-2026-02-18-11h16m49s-Onyeoma_Music_Video_Final.mp4-.mp4",
+        "name": "Why It Matters",
+        "type": "video",
+        "trimEnd": 8.9,
+        "storyline": "Onyeoma shows a single can be more than a single. By building a world around the song, we turned one release into:\n\na universe that can grow · something the artist owns · a clear place in the market · proof that a song can open a world",
+        "trimStart": 0,
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": false,
+        "thumbnail": "/assets/projects/2/posters/mlrvrwym-1vkoyw-vlc-record-2026-02-18-11h16m49s-Onyeoma_Music_Video_Final.mp4-.jpg",
+        "cardTitle": "The single, on film"
+      },
+      {
+        "src": "/assets/projects/2/mlrwgkb0-e5ezmr-Movie_085.mp4",
+        "name": "Why It Matters /2",
+        "type": "video",
+        "trimEnd": 11.1,
+        "storyline": "We don’t just launch releases · We design worlds that can grow",
+        "trimStart": 0,
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "thumbnail": "/assets/projects/2/posters/mlrwgkb0-e5ezmr-Movie_085.jpg",
+        "cardTitle": "The bench, in 3D"
+      }
+    ],
+    "storyline": "Inkreece is an Afrobeats artist with more than one side. We built a launch that shows all of him at once.\n\nFor the single “Onyeoma” we made a fictional romance in a 3D, anime-led world. It gave the song a story people could follow, and gave the artist a world he can keep selling into.",
+    "assets": [],
+    "thumbnail": "/assets/projects/2/thumbnail.jpg",
+    "storyline_title": "A world built around one love song",
+    "default_background_url": null,
+    "deckThumbnail": "/assets/projects/2/mlsj5ilg-vyls3j-Onyeoma.jpg",
+    "layout": "story",
+    "caseStudy": {
+      "title": "ONYEOMA",
+      "kicker": "Case Study 02 / Music World",
+      "tagline": "A mythic visual universe built around a love song.",
+      "client": "Inkreece",
+      "year": "2026",
+      "discipline": "Music World & Visual Campaign",
+      "scope": [
+        "Creative direction",
+        "Story and world building",
+        "3D animation",
+        "Character design",
+        "Shooting script and edit direction"
+      ],
+      "heroImage": "/assets/projects/2/thumbnail.jpg",
+      "heroPosition": "50% 42%",
+      "nextProjectId": "7",
+      "chapterNotes": {
+        "Studio Role": "The paper trail, in order: seven plates of questions, the script we shot, and the notes the cut was finished against.",
+        "What We Made": "Cover art that carries the world off the screen and onto shelves, and objects from the world made real."
+      },
+      "format": "Music film, shooting script, edit notes, questionnaire, cover art, character design, collage",
+      "status": "Delivered",
+      "headline": "Gave a single a universe the artist can keep selling into.",
+      "chapterLayouts": {
+        "Studio Role": "aside-pair"
+      },
+      "chapterKickers": {
+        "The Approach": "Starting point / The brief",
+        "Studio Role": "The work / How it was made",
+        "What We Made": "The pieces / Objects from the world",
+        "Why It Matters": "Impact / Why it matters"
+      }
+    }
+  },
+  {
+    "id": "7",
+    "name": "CUPIDSZN'S MYTHERA EP",
+    "items": [
+      {
+        "src": "/assets/projects/7/MYTHERA Visual Campaign & Narrative Launch Strategy.pdf",
+        "name": "The Plan",
+        "type": "pdf",
+        "storyline": "We wrote the brief the whole campaign runs on: the world, the rules inside it, the brand direction and the script for all twenty videos.\n\nTreatments, cuts and drops all pull from that one document, which is how every video lands in the same universe even when an idea moves to a different song.",
+        "thumbnail": "/assets/projects/7/posters/mythera-plan-slide.jpg",
+        "cardTitle": "The campaign brief",
+        "aspect": "slide",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/7/MYTHERA The Approach.pdf",
+        "name": "The Approach",
+        "type": "pdf",
+        "storyline": "MYTHERA is a film told in twenty parts, four per song. Each part moves the story on and spotlights its track, so the EP plays like a series you want to finish.\n\nThe brief was built to be raided: the team could lift a treatment, move an idea onto a different sound if it fit better there, and the artist still stayed in one world.",
+        "thumbnail": "/assets/projects/7/posters/mythera-approach-slide.jpg",
+        "cardTitle": "The deck: creative concept",
+        "aspect": "slide",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/7/mythera-approach-film.mp4",
+        "name": "The Approach /2",
+        "type": "video",
+        "storyline": "One of the scenes cut from the brief: the club, the commission line, the world already running before the first chorus.",
+        "thumbnail": "/assets/projects/7/posters/mythera-approach-film.jpg",
+        "cardTitle": "The club scene",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "focus": "50% 45%"
+      },
+      {
+        "src": "/assets/projects/7/MYTHERA Studio Role.pdf",
+        "name": "Studio Role",
+        "type": "pdf",
+        "storyline": "Creative strategist on the campaign: creative direction, the ad production brief and the script for all twenty videos, plus the brand direction that kept every drop on theme.\n\nExecution and the shoot sat outside the Cappuccino Studiox team. We wrote the brief and set the direction; production brought it to screen.",
+        "thumbnail": "/assets/projects/7/CuupidSZN Mythera Studio Role Thumbnail.jpg",
+        "cardTitle": "The studio role deck",
+        "aspect": "slide",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/7/mythera-studio-film.mp4",
+        "name": "Studio Role /2",
+        "type": "video",
+        "storyline": "Shot straight off the page: the line, the wardrobe and the black-and-white grade all came out of the brief, not the edit.",
+        "thumbnail": "/assets/projects/7/posters/mythera-studio-film.jpg",
+        "cardTitle": "The corridor scene",
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true,
+        "focus": "50% 38%"
+      },
+      {
+        "src": "/assets/projects/7/mythera-why-01.mp4",
+        "name": "Why It Matters",
+        "type": "video",
+        "storyline": "MYTHERA treats an EP like a series, not a set of singles. One brief held twenty videos, the branding and a signing announcement together, and it still left the team room to rebuild an idea wherever it worked better.\n\nThat is the part worth repeating: strategy and a script can hold a whole release together, even when the shoot happens somewhere else.",
+        "thumbnail": "/assets/projects/7/posters/mythera-why-01.jpg",
+        "cardTitle": "Night ride",
+        "portrait": true,
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      },
+      {
+        "src": "/assets/projects/7/mythera-why-02.mp4",
+        "name": "Why It Matters /2",
+        "type": "video",
+        "storyline": "Same universe, different song — the brief was written so any scene could be refurbished for whichever sound it landed on best.",
+        "thumbnail": "/assets/projects/7/posters/mythera-why-02.jpg",
+        "cardTitle": "Pink room",
+        "portrait": true,
+        "storylineTitle": "",
+        "backgroundRoster": true,
+        "defaultBackgroundRoster": true
+      }
+    ],
+    "storyline": "Mavin Records signed Cupidszn, and the EP needed a launch bigger than a music video. We came in as creative strategists: we built the world, set the brand direction and scripted all twenty videos across the five songs.\n\nProduction and the shoots were handled outside the studio. Our work was the thinking, the writing and the direction every video was made from.",
+    "assets": [],
+    "thumbnail": "/assets/projects/7/CuupidSZN Mythera Project Thumbnail.jpg",
+    "default_background_url": "/assets/projects/7/CuupidSZN Mythera Project Thumbnail.jpg",
+    "layout": "story",
+    "caseStudy": {
+      "title": "CUPIDSZN'S MYTHERA EP",
+      "kicker": "Case Study 05 / Music World",
+      "tagline": "Creative strategy and a twenty-part script that launched an EP and a new signing at once.",
+      "discipline": "Music World & Visual Campaign",
+      "heroImage": "/assets/projects/7/CuupidSZN Mythera Project Thumbnail.jpg",
+      "heroPosition": "50% 45%",
+      "nextProjectId": "1",
+      "headline": "Launched a signing with a campaign, not a one-off video.",
+      "scope": [
+        "Creative strategy",
+        "Creative direction",
+        "Ad production brief",
+        "Scriptwriting — 20 videos",
+        "Brand direction"
+      ],
+      "format": "20 short films, campaign strategy, launch plan",
+      "status": "Strategy & direction delivered"
+    },
+    "storylineTitle": "Twenty videos, one story, one debut"
+  }
+]

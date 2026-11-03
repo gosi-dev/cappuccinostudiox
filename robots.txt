@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /project-edit.html
+Disallow: /content-management.html
+Disallow: /ui-kit/
+Disallow: /js/inline/
+Disallow: /src/data/

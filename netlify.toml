@@ -1,0 +1,160 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Clean URLs for the nav items.
+[[redirects]]
+  from = "/work"
+  to = "/project-files.html"
+  status = 200
+
+[[redirects]]
+  from = "/offers"
+  to = "/offers.html"
+  status = 200
+
+[[redirects]]
+  from = "/kitchen"
+  to = "/kitchen.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/booking.html"
+  status = 200
+
+# The house exterior is the home page again; /studio was a temporary alias.
+[[redirects]]
+  from = "/studio"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/studio.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/assets/*"
+  to = "/public/assets/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api"
+  status = 200
+  force = true
+
+# When the site is mounted at /cappuccinostudiox, keep assets and API working
+# under that prefix without changing the public URL.
+[[redirects]]
+  from = "/cappuccinostudiox/assets/*"
+  to = "/public/assets/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/cappuccinostudiox/api/*"
+  to = "/.netlify/functions/api"
+  status = 200
+  force = true
+
+# Serve the app's HTML, JS, CSS and static media from the subpath as well.
+[[redirects]]
+  from = "/cappuccinostudiox"
+  to = "/"
+  status = 200
+  force = true
+
+# Clean URLs under the subpath. Netlify applies redirects in one pass, so
+# "/cappuccinostudiox/*" -> "/:splat" would turn /cappuccinostudiox/kitchen into
+# /kitchen and stop there (the /kitchen rule above is never re-evaluated), which
+# 404s. These explicit entries keep the short paths working under the prefix.
+[[redirects]]
+  from = "/cappuccinostudiox/kitchen"
+  to = "/kitchen.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/cappuccinostudiox/work"
+  to = "/project-files.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/cappuccinostudiox/offers"
+  to = "/offers.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/cappuccinostudiox/contact"
+  to = "/booking.html"
+  status = 200
+  force = true
+
+# The deprecated /studio alias, kept working (and staying inside the prefix)
+# when the app is mounted under /cappuccinostudiox.
+[[redirects]]
+  from = "/cappuccinostudiox/studio"
+  to = "/cappuccinostudiox/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cappuccinostudiox/studio.html"
+  to = "/cappuccinostudiox/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/cappuccinostudiox/*"
+  to = "/:splat"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/public/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/cappuccinostudiox/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/cappuccinostudiox/public/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# JS/CSS are imported by bare path, so a stale copy would silently break the
+# menu after a deploy. Revalidate them on every load.
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

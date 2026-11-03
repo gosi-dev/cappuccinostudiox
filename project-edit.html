@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/basePath-init.js"></script>
+    <script src="js/adminSession.js"></script>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <title>Cappuccino Studiox-Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html, body, * { font-family: 'Inter', sans-serif !important; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            min-height: 100vh;
+            background-color: #E70017;
+            color: #FFF212;
+            padding: 40px 80px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: #FFF212;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+        .back-link:hover { color: #fff; }
+        h1 { text-transform: uppercase; margin-bottom: 24px; font-size: 24px; }
+        .upload-zone {
+            border: 2px dashed #FFF212;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 24px;
+            cursor: pointer;
+            background: rgba(255,242,18,0.05);
+        }
+        .upload-zone:hover { background: rgba(255,242,18,0.15); }
+        .upload-zone input[type="file"] { display: none; }
+        .playlist {
+            list-style: none;
+        }
+        .playlist li {
+            background: rgba(255,242,18,0.1);
+            border: 1px solid #FFF212;
+            margin-bottom: 8px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+        .playlist .drag-handle {
+            cursor: grab;
+            padding: 4px;
+            user-select: none;
+        }
+        .playlist .drag-handle:active { cursor: grabbing; }
+        .playlist .preview {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: #000;
+        }
+        .playlist .preview-video { width: 80px; height: 60px; object-fit: cover; flex-shrink: 0; background: #000; }
+        .playlist .preview-pdf-placeholder {
+            width: 80px; height: 60px; flex-shrink: 0; background: rgba(0,0,0,0.4);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; text-transform: uppercase;
+        }
+        .pdf-thumbnail-hint { margin-bottom: 16px; font-size: 14px; opacity: 0.9; }
+        .playlist .body { flex: 1; min-width: 0; }
+        .playlist .name { font-weight: bold; text-transform: uppercase; margin-bottom: 8px; word-break: break-all; }
+        .playlist .trim-label { font-size: 11px; text-transform: uppercase; opacity: 0.85; margin-bottom: 4px; }
+        .playlist .row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        .playlist .switch-label { text-transform: uppercase; font-size: 12px; }
+        .playlist .switch {
+            width: 44px;
+            height: 24px;
+            background: rgba(255,242,18,0.3);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+        }
+        .playlist .switch.on { background: #FFF212; }
+        .playlist .switch::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #E70017;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.2s;
+        }
+        .playlist .switch.on::after { transform: translateX(20px); }
+        .playlist .item-storyline-title {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 8px;
+            background: #000;
+            border: 1px solid #FFF212;
+            color: #FFF212;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 12px;
+            box-sizing: border-box;
+        }
+        .playlist textarea.storyline {
+            width: 100%;
+            min-height: 60px;
+            padding: 8px;
+            background: #000;
+            border: 1px solid #FFF212;
+            color: #FFF212;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 12px;
+            resize: vertical;
+        }
+        .playlist .move-btns { display: flex; flex-direction: column; gap: 4px; }
+        .playlist .move-btn {
+            background: #FFF212;
+            color: #E70017;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 12px;
+        }
+        .playlist .move-btn:hover { background: #fff; }
+        .playlist .delete-item-btn {
+            background: transparent;
+            color: #FFF212;
+            border: 1px solid #FFF212;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .playlist .delete-item-btn:hover { background: #FFF212; color: #E70017; }
+        .playlist .replace-item-btn, .playlist .retrim-item-btn, .playlist .addcut-item-btn {
+            background: rgba(255,242,18,0.2);
+            color: #FFF212;
+            border: 1px solid #FFF212;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+        .playlist .replace-item-btn:hover, .playlist .retrim-item-btn:hover, .playlist .addcut-item-btn:hover { background: #FFF212; color: #E70017; }
+        .upload-progress-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .upload-progress-box {
+            background: #E70017;
+            border: 2px solid #FFF212;
+            color: #FFF212;
+            padding: 24px 32px;
+            text-align: center;
+            font-family: 'Code Saver', sans-serif;
+            min-width: 280px;
+        }
+        .upload-progress-title { font-size: 16px; text-transform: uppercase; margin-bottom: 12px; }
+        .upload-progress-text { font-size: 14px; opacity: 0.95; }
+        .project-name-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid #FFF212;
+            color: #FFF212;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 16px;
+        }
+        .project-name-input::placeholder { color: rgba(255,242,18,0.6); }
+        .storyline-project {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid #FFF212;
+            color: #FFF212;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 14px;
+            resize: vertical;
+        }
+        .storage-usage { margin: 12px 0; font-size: 12px; text-transform: uppercase; opacity: 0.9; }
+        .save-btn {
+            background: #FFF212;
+            color: #E70017;
+            border: 2px solid #FFF212;
+            padding: 12px 24px;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 16px;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 24px;
+        }
+        .save-btn:hover { background: #fff; border-color: #fff; }
+        .thumbnail-choose-btn, .thumbnail-clear-btn {
+            background: rgba(255,242,18,0.2);
+            color: #FFF212;
+            border: 1px solid #FFF212;
+            padding: 8px 16px;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        .thumbnail-choose-btn:hover, .thumbnail-clear-btn:hover { background: #FFF212; color: #E70017; }
+
+        /* Video trim modal */
+        .trim-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .trim-overlay.visible { display: flex; }
+        .trim-modal {
+            background: #E70017;
+            border: 2px solid #FFF212;
+            color: #FFF212;
+            max-width: 90vw;
+            width: 640px;
+            padding: 24px;
+            font-family: 'Code Saver', sans-serif;
+        }
+        .trim-modal h2 {
+            text-transform: uppercase;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        .trim-video-wrap {
+            position: relative;
+            background: #000;
+            margin-bottom: 16px;
+            aspect-ratio: 16/9;
+        }
+        .trim-video-wrap video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .trim-controls {
+            margin-bottom: 16px;
+        }
+        .trim-controls label {
+            display: block;
+            text-transform: uppercase;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .trim-controls input[type="range"] {
+            width: 100%;
+            margin: 8px 0;
+            accent-color: #FFF212;
+        }
+        .trim-times {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .trim-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .trim-actions button {
+            background: #FFF212;
+            color: #E70017;
+            border: 2px solid #FFF212;
+            padding: 10px 20px;
+            font-family: 'Code Saver', sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        .trim-actions button:hover { background: #fff; border-color: #fff; }
+        .trim-actions button.secondary {
+            background: transparent;
+            color: #FFF212;
+            border-color: #FFF212;
+        }
+        .trim-actions button.secondary:hover { background: #FFF212; color: #E70017; }
+    </style>
+</head>
+<body class="page-entering">
+    <a href="content-management.html" class="back-link">â† Back to Content Management</a>
+    <h1 id="pageTitle">Edit Project</h1>
+    <div class="project-name-panel" style="margin-bottom: 20px;">
+        <label class="switch-label" style="display: block; margin-bottom: 8px;">Project name</label>
+        <input type="text" id="projectNameInput" class="project-name-input" placeholder="Project name (shown on project page menu)">
+    </div>
+    <div class="project-thumbnail-panel" style="margin-bottom: 20px;">
+        <label class="switch-label" style="display: block; margin-bottom: 8px;">Project thumbnail</label>
+        <p class="thumbnail-hint" style="font-size: 12px; margin-bottom: 8px; text-transform: uppercase; opacity: 0.9;">Shown on the project card on the Project Files page. Image only.</p>
+        <input type="file" id="thumbnailInput" accept="image/*" style="display: none;">
+        <div class="thumbnail-upload-wrap" style="display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap;">
+            <button type="button" id="thumbnailChooseBtn" class="thumbnail-choose-btn">Choose image</button>
+            <div class="thumbnail-preview-wrap" style="min-width: 120px; min-height: 90px; background: rgba(0,0,0,0.2); border: 1px solid #FFF212; display: flex; align-items: center; justify-content: center;">
+                <img id="thumbnailPreview" src="" alt="Thumbnail preview" style="max-width: 200px; max-height: 150px; object-fit: contain; display: none;">
+                <span id="thumbnailPlaceholder" style="font-size: 12px; text-transform: uppercase; opacity: 0.7;">No thumbnail</span>
+            </div>
+            <button type="button" id="thumbnailClearBtn" class="thumbnail-clear-btn" style="display: none;">Clear</button>
+        </div>
+    </div>
+    <div class="default-background-panel" style="margin-bottom: 20px;">
+        <label class="switch-label" style="display: block; margin-bottom: 8px;">Default background (project page)</label>
+        <p class="thumbnail-hint" style="font-size: 12px; margin-bottom: 8px; text-transform: uppercase; opacity: 0.9;">Shown as the project page background until a gallery item is selected. Image or video.</p>
+        <input type="file" id="defaultBackgroundInput" accept="image/*,video/*" style="display: none;">
+        <div class="default-background-upload-wrap" style="display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap;">
+            <button type="button" id="defaultBackgroundChooseBtn" class="thumbnail-choose-btn">Choose image or video</button>
+            <div class="default-background-preview-wrap" style="min-width: 120px; min-height: 90px; background: rgba(0,0,0,0.2); border: 1px solid #FFF212; display: flex; align-items: center; justify-content: center;">
+                <img id="defaultBackgroundPreviewImg" src="" alt="" style="max-width: 200px; max-height: 150px; object-fit: contain; display: none;">
+                <video id="defaultBackgroundPreviewVideo" muted playsinline loop style="max-width: 200px; max-height: 150px; object-fit: contain; display: none;"></video>
+                <span id="defaultBackgroundPlaceholder" style="font-size: 12px; text-transform: uppercase; opacity: 0.7;">No default background</span>
+            </div>
+            <button type="button" id="defaultBackgroundClearBtn" class="thumbnail-clear-btn" style="display: none;">Clear</button>
+        </div>
+    </div>
+    <p style="margin-bottom: 16px;">Upload content. Drag items to reorder. Toggle â€œBackground rosterâ€ to use in the default background loop. Add a storyline to show when this content is hovered on the project page.</p>
+    <div class="storyline-panel" style="margin-bottom: 24px;">
+        <label class="switch-label" style="display: block; margin-bottom: 8px;">Storyline (project)</label>
+        <input type="text" id="projectStorylineTitle" class="storyline-title-input" placeholder="Storyline title (optional)" style="display: block; width: 100%; margin-bottom: 8px; padding: 8px; font-family: inherit; font-size: 14px; box-sizing: border-box;">
+        <textarea id="projectStoryline" class="storyline-project" placeholder="Storyline body text (shown on the project page when content is active; title appears above body)"></textarea>
+    </div>
+    <div class="upload-zone" id="uploadZone">
+        <input type="file" id="fileInput" accept="image/*,video/*,application/pdf" multiple>
+        <input type="file" id="replaceFileInput" style="display:none">
+        <input type="file" id="pdfThumbnailInput" accept="image/*" style="display:none">
+        <span>Click or drop files here to add content (images and videos)</span>
+    </div>
+    <ul class="playlist" id="playlist"></ul>
+    <p class="storage-usage" id="storageUsage">Storage: 0 / 100 MB</p>
+    <button type="button" class="save-btn" id="saveBtn">Save project</button>
+
+    <!-- Upload progress -->
+    <div id="uploadProgressOverlay" class="upload-progress-overlay" style="display: none;">
+        <div class="upload-progress-box">
+            <p class="upload-progress-title">Uploading to cloud…</p>
+            <p id="uploadProgressText" class="upload-progress-text">0 of 0 items · 0 MB of 0 MB</p>
+        </div>
+    </div>
+
+    <!-- PDF thumbnail modal (after adding a PDF, choose image as gallery thumbnail) -->
+    <div class="trim-overlay" id="pdfThumbnailOverlay">
+        <div class="trim-modal">
+            <h2 id="pdfThumbnailTitle">Set thumbnail for PDF</h2>
+            <p class="pdf-thumbnail-hint">Choose an image to show in the gallery for this PDF.</p>
+            <div class="trim-actions">
+                <button type="button" id="pdfThumbnailChooseBtn">Choose image</button>
+                <button type="button" class="secondary" id="pdfThumbnailSkipBtn">Skip (set later)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video trim modal -->
+    <div class="trim-overlay" id="trimOverlay">
+        <div class="trim-modal">
+            <h2>Trim video – choose the part to show</h2>
+            <div class="trim-video-wrap">
+                <video id="trimPreviewVideo" muted playsInline preload="metadata" controls></video>
+            </div>
+            <div class="trim-controls">
+                <label>Start (seconds)</label>
+                <input type="range" id="trimStartRange" min="0" max="100" value="0" step="0.1">
+                <label>End (seconds)</label>
+                <input type="range" id="trimEndRange" min="0" max="100" value="10" step="0.1">
+            </div>
+            <div class="trim-times">
+                <span id="trimStartLabel">Start: 0:00</span>
+                <span id="trimEndLabel">End: 0:00</span>
+                <span id="trimDurationLabel">Duration: 0:00</span>
+                <span id="trimSizeLabel">Size: —</span>
+            </div>
+            <div class="trim-actions">
+                <button type="button" id="trimPlayPauseBtn">Play</button>
+                <button type="button" id="trimAddBtn">Add to playlist</button>
+                <button type="button" class="secondary" id="trimCancelBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <a href="index.html">
+            <img src="Studioxx Logo.png" alt="Studioxx Logo" class="logo" style="position:fixed;top:30px;left:80px;height:83.52px;width:auto;z-index:200;cursor:pointer;">
+        </a>
+        <div class="menu-container" id="projectMenuContainer" style="position:fixed;top:40px;right:80px;display:flex;flex-direction:column;align-items:flex-end;gap:12px;z-index:200;">
+            <button class="menu-button" id="projectMenuButton">
+                <span id="projectMenuText">PROJECT</span>
+                <span class="dropdown-icon"></span>
+            </button>
+            <a href="index.html" class="menu-child-button">GO OUTSIDE</a>
+            <a href="kitchen.html" class="menu-child-button">KITCHEN</a>
+            <a href="offers.html" class="menu-child-button">OFFERS</a>
+            <a href="project-files.html" class="menu-child-button" id="projectMenuBack">PROJECT FILES</a>
+            <a href="booking.html" class="menu-child-button">BOOK A SESSION</a>
+        </div>
+    </div>
+
+    <script type="module" src="js/pages/project-edit.js"></script>
+    <script src="js/inline/project-edit-1.js"></script>
+</body>
+</html>
