@@ -364,7 +364,13 @@ The repository is `gosi-dev/cappuccinostudiox` (**private**). Its history was bu
 
 What is deliberately **not** in the repo: `src/data/bookings.json` and `waitlist.json` (customer PII — currently empty, but the app writes real submissions there in dev), `node_modules/` and `.netlify/` (local CLI state). Everything else is tracked, **including `public/assets/`** — 522 MB of video, PDFs and project uploads — because the media *is* the portfolio and the repo is private. The accepted cost is a ~530 MB clone and binaries that git cannot diff or merge.
 
-Actions still open: never reuse that string; check whether it was reused for e-mail, hosting, FTP or a password-manager entry; rotate anything it unlocked. GitHub's native **secret scanning with push protection** is available for public repos (and private ones with GitHub Advanced Security); this private repo reports no such configuration, so the equivalent check has to stay manual — the pattern scan in §4 covers it, and `git grep` before each push is the cheap version.
+Actions still open: never reuse that string; check whether it was reused for e-mail, hosting, FTP or a password-manager entry; rotate anything it unlocked. GitHub's native **secret scanning with push protection** is only free on public repos (private ones need GitHub Advanced Security), and this repo reports no such configuration — so the equivalent check is local: **`scripts/pre-push-scan.sh`**, installed as `.git/hooks/pre-push`:
+
+```bash
+ln -sf ../../scripts/pre-push-scan.sh .git/hooks/pre-push
+```
+
+It greps the whole tree, **including binaries**, for (1) known-burnt literals by value — the list lives in `.git/burnt-literals.txt`, outside git, because writing the literal into a committed script would re-publish it — (2) credential shapes (`sk-…`, `ghp_…`, `AKIA…`, JWTs, PEM blocks, Slack tokens), (3) secret-bearing files (`.env`, `*.pem`, `*.key`, `secrets.json`) that became tracked, and (4) `bookings.json` / `waitlist.json` sneaking in. Verified against planted samples: each one blocks the push with exit 1. Bypass only with `git push --no-verify`, after reading what it flagged.
 
 
 ---
